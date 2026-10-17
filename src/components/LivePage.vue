@@ -1,10 +1,9 @@
 <script setup>
 import migoMark from "../assets/migo-mark.png";
 import migoWordmark from "../assets/migo-wordmark.png";
+import phone from "/migophone-nobg.png";
 import migoWordmarkDark from "../assets/migo-wordmark-dark.png";
 import googlePlayLogo from "../assets/Google Play Logo.png";
-import locationPin from "../assets/Location pin.png";
-import migoVan from "../assets/migo-van.svg";
 import routeIllustration from "../assets/Illustration · Phone route.png";
 import safetyIllustration from "../assets/Illustration · Safety shield.png";
 import { Check, ReceiptText, UserRoundCheck, ShieldCheck } from "@lucide/vue";
@@ -63,18 +62,9 @@ const emit = defineEmits(["toggle-theme", "open-waitlist"]);
             </div>
           </div>
 
-          <figure class="migo-ride-image migo-hero-scene" role="img" aria-label="A MIGO car moving along a city street">
-            <div class="migo-app-visual migo-hero-visual" aria-hidden="true">
-              <div class="migo-app-city">
-                <span></span><span></span><span></span><span></span><span></span><span></span>
-                <span></span><span></span><span></span><span></span><span></span><span></span>
-              </div>
-              <img class="migo-app-pin" :src="locationPin" alt="" />
-              <div class="migo-app-road">
-                <img class="migo-app-car" :src="migoVan" alt="" />
-              </div>
-            </div>
-          </figure>
+          <div class="migo-home-visual" aria-hidden="true">
+            <img :src="phone" alt="" />
+          </div>
         </div>
       </section>
 
@@ -200,15 +190,8 @@ const emit = defineEmits(["toggle-theme", "open-waitlist"]);
               </a>
             </div>
           </div>
-          <div class="migo-app-visual" aria-hidden="true">
-            <div class="migo-app-city">
-              <span></span><span></span><span></span><span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span><span></span><span></span>
-            </div>
-            <img class="migo-app-pin" :src="locationPin" alt="" />
-            <div class="migo-app-road">
-              <img class="migo-app-car" :src="migoVan" alt="" />
-            </div>
+          <div class="migo-app-media" aria-hidden="true">
+            <img src="/migoapps.jpg" alt="" />
           </div>
         </div>
       </section>

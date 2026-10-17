@@ -1,5 +1,6 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
+import { ConvexClient } from "convex/browser";
 import migoMark from "./assets/migo-mark.png";
 import migoWordmark from "./assets/migo-wordmark.png";
 import migoWordmarkDark from "./assets/migo-wordmark-dark.png";
@@ -12,6 +13,13 @@ const submitted = ref(false);
 const isDark = ref(false);
 const showSplash = ref(true);
 const currentPage = ref(resolvePage(window.location.pathname));
+
+// Waitlist form -> Convex. `npx convex dev` writes VITE_CONVEX_URL to .env.local.
+const form = reactive({ name: "", email: "", phone: "", city: "" });
+const submitting = ref(false);
+const formError = ref("");
+const convexUrl = import.meta.env.VITE_CONVEX_URL;
+const convex = convexUrl ? new ConvexClient(convexUrl) : null;
 
 function resolvePage(pathname) {
   const path = pathname.replace(/\/+$/, "") || "/";
@@ -55,8 +63,37 @@ function toggleTheme() {
   window.localStorage.setItem("migo-theme", isDark.value ? "dark" : "light");
 }
 
-function joinWaitlist() {
-  submitted.value = true;
+async function joinWaitlist() {
+  formError.value = "";
+
+  if (!convex) {
+    console.warn(
+      "[migo] VITE_CONVEX_URL is not set — run `npx convex dev` to connect the waitlist.",
+    );
+    formError.value = "The waitlist isn't connected yet. Please try again shortly.";
+    return;
+  }
+
+  submitting.value = true;
+  try {
+    const result = await convex.mutation("waitlist:join", {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim(),
+      city: form.city.trim(),
+      role: rideType.value,
+    });
+    if (!result.ok) {
+      formError.value = result.error;
+      return;
+    }
+    submitted.value = true;
+  } catch (error) {
+    console.error(error);
+    formError.value = "Something went wrong. Please try again.";
+  } finally {
+    submitting.value = false;
+  }
 }
 </script>
 
@@ -173,6 +210,7 @@ function joinWaitlist() {
               <label class="field-label" for="full-name">Full name</label>
               <input
                 id="full-name"
+                v-model="form.name"
                 name="name"
                 autocomplete="name"
                 placeholder="What should we call you?"
@@ -181,6 +219,7 @@ function joinWaitlist() {
               <label class="field-label" for="email">Email address</label>
               <input
                 id="email"
+                v-model="form.email"
                 name="email"
                 type="email"
                 autocomplete="email"
@@ -190,6 +229,7 @@ function joinWaitlist() {
               <label class="field-label" for="phone">Phone number</label>
               <input
                 id="phone"
+                v-model="form.phone"
                 name="phone"
                 type="tel"
                 autocomplete="tel"
@@ -199,14 +239,17 @@ function joinWaitlist() {
               <label class="field-label" for="city">Your city</label>
               <input
                 id="city"
+                v-model="form.city"
                 name="city"
                 autocomplete="address-level2"
                 placeholder="Where do you ride?"
                 required
               />
-              <button class="submit-button" type="submit">
-                Join the waitlist <span aria-hidden="true">→</span>
+              <button class="submit-button" type="submit" :disabled="submitting">
+                {{ submitting ? "Joining…" : "Join the waitlist" }}
+                <span v-if="!submitting" aria-hidden="true">→</span>
               </button>
+              <p v-if="formError" class="form-error" role="alert">{{ formError }}</p>
               <p class="privacy-note">
                 No spam. Just a heads-up when Migo is ready.
               </p>

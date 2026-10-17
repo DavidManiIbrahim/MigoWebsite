@@ -91,7 +91,7 @@ body {
   position: relative;
   bottom: 20px;
   /* width: 50%; */
-    width: min(230px, 58vw);
+  width: min(230px, 58vw);
   height: 20vh;
   object-fit: contain;
 }
@@ -679,9 +679,13 @@ a {
   letter-spacing: 0;
 }
 .brand-logo {
-  width: auto;
-  height: 25px;
-  object-fit: contain;
+  width: 112px;
+  height: 42px;
+  object-fit: cover;
+  object-position: center 54%;
+}
+:root[data-theme="dark"] .brand-logo {
+  filter: brightness(0) invert(1);
 }
 .site-header .brand-name {
   color: #171816;
@@ -1223,6 +1227,17 @@ h3 {
   transform: translateY(-1px);
   background: #34352f;
 }
+.submit-button:disabled {
+  transform: none;
+  cursor: progress;
+  opacity: 0.65;
+}
+.form-error {
+  margin: 9px 0 0;
+  color: #b3261e;
+  text-align: center;
+  font-size: 10px;
+}
 .submit-button span {
   font-size: 15px;
 }
@@ -1491,8 +1506,8 @@ h3 {
   font-size: 17px;
 }
 .site-footer .brand-logo {
-  width: auto;
-  height: 22px;
+  width: 100px;
+  height: 38px;
 }
 .site-footer p,
 .copyright {
@@ -2442,6 +2457,9 @@ h3 {
   font-size: 9px;
   font-weight: 600;
 }
+:root[data-theme="dark"] .migo-live .driver-benefits p {
+  color: #fff;
+}
 .driver-benefits p > span {
   width: 17px;
   height: 17px;
@@ -2644,7 +2662,7 @@ h3 {
    alone keeps the mark and the wordmark at their true proportions. */
 .migo-logo-mark {
   width: auto;
-  height: 27px;
+  height: 17px;
   object-fit: contain;
 }
 .migo-logo-wordmark {
@@ -2654,7 +2672,7 @@ h3 {
 }
 .splash-logo-mark {
   width: auto;
-  height: 62px;
+  height: 72px;
   /* object-fit: contain; */
 }
 .splash-logo-wordmark {
@@ -2781,10 +2799,14 @@ h3 {
 .migo-ride-image img {
   object-fit: contain;
 }
+.migo-ride-image .migo-app-car {
+  width: min(460px, 130%);
+  height: auto;
+}
 .migo-ride-image .migo-hero-car {
   position: absolute;
-  z-index: 2;
-  bottom: -4%;
+  z-index: 200;
+  bottom: -14%;
   left: 0;
   width: min(88%, 350px);
   height: auto;
@@ -3095,66 +3117,50 @@ h3 {
 }
 .migo-app-car {
   position: absolute;
-  bottom: 4px;
-  left: 14%;
-  width: 96px;
-  height: 46px;
-}
-.migo-app-car-body {
-  position: absolute;
-  z-index: 1;
-  bottom: 6px;
-  left: 6px;
-  width: 80px;
-  height: 23px;
-  border: 3px solid #111;
-  border-radius: 17px 18px 7px 7px;
-  background: var(--app-yellow);
-}
-.migo-app-car-cabin {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 26px;
-  width: 39px;
-  height: 19px;
-  border: 3px solid #111;
-  border-bottom: 0;
-  border-radius: 15px 15px 0 0;
-  background: linear-gradient(
-    90deg,
-    var(--app-yellow) 0 46%,
-    #111 46% 53%,
-    var(--app-yellow) 53%
-  );
-}
-.migo-app-wheel {
-  position: absolute;
-  z-index: 3;
-  bottom: 1px;
-  width: 18px;
-  aspect-ratio: 1;
-  border: 3px solid #111;
-  border-radius: 50%;
-  background: var(--app-paper);
-}
-.migo-app-wheel-front {
-  right: 10px;
-}
-.migo-app-wheel-back {
-  left: 15px;
-}
-@keyframes migo-app-dash {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: -52px 0;
-  }
+  z-index: 999;
+  bottom: -64px;
+  left: -6%;
+  width: min(260px, 130%);
+  aspect-ratio: 2.4;
+  height: auto;
+  object-fit: cover;
+  object-position: center 53%;
+  mix-blend-mode: multiply;
 }
 @media (prefers-reduced-motion: reduce) {
   .migo-app-road::before {
     animation: none;
+  }
+}
+/* "Get the MIGO app" section visual — app image (public/migoapps.jpg, 1024x1024).
+   The JPG has a black background, so `screen` blending drops it against the dark card. */
+.migo-app-cta-inner {
+  min-height: 320px;
+}
+.migo-app-media {
+  position: absolute;
+  /* margin-top: -50px; */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  aspect-ratio: 1 / 1;
+  width: auto;
+  overflow: hidden;
+  pointer-events: none;
+}
+.migo-app-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: screen;
+}
+@media (max-width: 600px) {
+  .migo-app-media {
+    top: auto;
+    width: 50%;
+    height: auto;
+    opacity: 0.75;
   }
 }
 .migo-driver-panel {
@@ -3392,6 +3398,14 @@ h3 {
 }
 
 @media (max-width: 600px) {
+  .migo-logo-symbol {
+    width: 38px;
+    height: 36px;
+  }
+  .migo-logo-wordmark {
+    width: 80px;
+    height: 31px;
+  }
   .migo-home-copy h1 {
     font-size: 45px;
   }
@@ -3430,6 +3444,32 @@ h3 {
   background: #242720;
   color: #f5f4ec;
 }
+.migo-logo-wordmark {
+  width: 126px;
+  height: 40px;
+  object-fit: cover;
+  object-position: center;
+}
+.footer-brand-block .migo-logo-wordmark {
+  width: 100px;
+  height: 32px;
+}
+.splash-logo-wordmark {
+  width: min(300px, 68vw);
+  height: 64px;
+  object-fit: cover;
+  object-position: center;
+}
+@media (max-width: 600px) {
+  .migo-logo-wordmark {
+    width: 100px;
+    height: 32px;
+  }
+  .splash-logo-wordmark {
+    width: min(240px, 64vw);
+    height: 52px;
+  }
+}
 .benefit-card {
   padding-top: 62px;
 }
@@ -3449,5 +3489,24 @@ h3 {
     top: 14px;
     right: 14px;
     left: auto;
+  }
+}
+
+/* Hero visual — phone on the right side of the hero.
+   The phone PNG (600x383) has ~12% transparent padding on each side. */
+.migo-home-visual {
+  position: relative;
+  width: min(100%, 470px);
+  justify-self: end;
+}
+.migo-home-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 600px) {
+  .migo-home-visual {
+    width: min(100%, 430px);
+    justify-self: center;
   }
 }
