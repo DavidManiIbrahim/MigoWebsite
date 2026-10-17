@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
 :root {
   --text: #6b6375;
@@ -2919,7 +2919,6 @@ h3 {
   padding: 28px 38px;
   border-radius: 20px;
   background: #111;
-  box-shadow: 0 16px 36px -24px rgb(255 212 0 / 85%);
 }
 .migo-app-cta h2 {
   position: relative;
@@ -3049,6 +3048,7 @@ h3 {
 }
 .migo-app-media {
   position: absolute;
+  /* box-shadow: 0 16px 36px -24px rgb(255 212 0 / 85%); */
   /* margin-top: -50px; */
   top: 0;
   right: 0;
@@ -3402,7 +3402,7 @@ h3 {
 .migo-home-visual {
   position: relative;
   width: min(100%, 470px);
-  justify-self: end;
+  justify-self: center;
 }
 .migo-home-visual img {
   display: block;
@@ -3412,7 +3412,7 @@ h3 {
 @media (max-width: 600px) {
   .migo-home-visual {
     width: min(100%, 430px);
-    justify-self: center;
+    justify-self: top;
   }
 }
 
@@ -3534,16 +3534,7 @@ h3 {
   height: 19px;
 }
 
-/* Hero phone — sits on the bottom edge of the hero, no gap under it.
-   -64px / -44px cancel the hero-inner's bottom padding (64px desktop, 44px mobile).
-   -12.17% trims the phone PNG's transparent bottom band (73 of 600px). */
-.migo-home-visual {
-  align-self: end;
-  margin-bottom: -64px;
-}
-.migo-home-visual img {
-  margin-bottom: -12.17%;
-}
+/* Hero phone is centred by the hero grid (align-items: center). */
 
 @media (max-width: 600px) {
   .driver-tag {
@@ -3558,7 +3549,75 @@ h3 {
   .driver-benefits p {
     font-size: 11px;
   }
-  .migo-home-visual {
-    margin-bottom: -44px;
+}
+
+/* Section type - how it works, safety and FAQ (the heading and intro rules are
+   shared with "Why MIGO", so that section scales with them). */
+.migo-why h2,
+.migo-section-intro h2,
+.migo-faq h2 {
+  font-size: 29px;
+}
+.migo-why-intro,
+.migo-section-intro p,
+.migo-faq-intro {
+  font-size: 14px;
+}
+.migo-step-grid h3,
+.migo-safety-grid h3 {
+  font-size: 18px;
+}
+.migo-faq-grid h3 {
+  font-size: 15px;
+}
+.migo-step-grid p,
+.migo-faq-grid p,
+.migo-safety-grid p {
+  font-size: 12px;
+}
+.migo-step-grid article > span,
+.migo-safety-grid article > span {
+  width: 34px;
+  height: 34px;
+  font-size: 16px;
+}
+
+/* "Ready to go" - the yellow bloom pools under the phone, not under the card. */
+.migo-app-cta::after {
+  content: none;
+}
+.migo-app-cta-inner {
+  box-shadow: none;
+}
+.migo-app-media {
+  background: radial-gradient(
+    58% 30% at 50% 97%,
+    rgb(255 212 0 / 65%) 0%,
+    rgb(255 212 0 / 0%) 72%
+  );
+}
+
+@media (max-width: 600px) {
+  .migo-why h2,
+  .migo-section-intro h2,
+  .migo-faq h2 {
+    font-size: 25px;
+  }
+  .migo-why-intro,
+  .migo-section-intro p,
+  .migo-faq-intro {
+    font-size: 13px;
+  }
+  .migo-step-grid h3,
+  .migo-safety-grid h3 {
+    font-size: 16px;
+  }
+  .migo-faq-grid h3 {
+    font-size: 14px;
+  }
+  .migo-step-grid p,
+  .migo-faq-grid p,
+  .migo-safety-grid p {
+    font-size: 11px;
   }
 }

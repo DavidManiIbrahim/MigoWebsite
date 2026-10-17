@@ -4,7 +4,6 @@ import { ConvexClient } from "convex/browser";
 import migoMark from "./assets/migo-mark.png";
 import migoWordmark from "./assets/migo-wordmark.png";
 import migoWordmarkDark from "./assets/migo-wordmark-dark.png";
-import locationPin from "./assets/Location pin.png";
 import LivePage from "./components/LivePage.vue";
 
 const defaultPage = "waitlist";
@@ -51,7 +50,7 @@ onMounted(() => {
   window.addEventListener("popstate", syncPage);
   const splashDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ? 1500
-    : 4800;
+    : 3200;
   window.setTimeout(() => {
     showSplash.value = false;
   }, splashDuration);
@@ -105,29 +104,18 @@ async function joinWaitlist() {
       role="status"
       aria-label="Migo is getting ready"
     >
+      <span class="splash-pulse" aria-hidden="true"></span>
+
       <div class="splash-brand">
-        <!-- <span class="splash-logo-lockup" aria-label="Migo"> -->
+        <span class="splash-logo-lockup" aria-hidden="true">
           <img class="splash-logo-mark" :src="migoMark" alt="" />
-          <img class="splash-logo-wordmark" :src="isDark ? migoWordmarkDark : migoWordmark" alt="" />
-        <!-- </span> -->
+          <img class="splash-logo-wordmark" :src="migoWordmarkDark" alt="" />
+        </span>
         <h1>Get moving with confidence.</h1>
         <div class="splash-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-        <p>YOUR CITY. YOUR MOVE.</p>
       </div>
-      <div class="splash-city" aria-hidden="true">
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-      </div>
-      <div class="splash-road" aria-hidden="true">
-        <div class="splash-car">
-          <img class="splash-pin" :src="locationPin" alt="" />
-          <span class="splash-car-cabin"></span>
-          <span class="splash-car-body"></span>
-          <i class="splash-wheel splash-wheel-front"></i>
-          <i class="splash-wheel splash-wheel-back"></i>
-        </div>
-      </div>
+
+      <p class="splash-cityline">YOUR CITY. YOUR MOVE.</p>
     </div>
   </Transition>
 
