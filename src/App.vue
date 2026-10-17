@@ -129,11 +129,12 @@ async function joinWaitlist() {
   <template v-else>
     <header class="site-header">
       <a class="brand" href="#home" aria-label="Migo Rides home">
-        <img class="brand-logo" :src="isDark ? migoWordmarkDark : migoWordmark" alt="" />
+          <img class="migo-logo-mark" :src="migoMark" alt="" />
+        <img class="migo-logo-wordmark" :src="isDark ? migoWordmarkDark : migoWordmark" alt="" />
       </a>
-      <a class="waitlist-nav-link" href="/live" @click.prevent="navigateTo('/live')">
+      <!-- <a class="waitlist-nav-link" href="/live" @click.prevent="navigateTo('/live')">
         Preview live page <span aria-hidden="true">↗</span>
-      </a>
+      </a> -->
       <button
         class="theme-toggle"
         type="button"
@@ -268,10 +269,11 @@ async function joinWaitlist() {
 
     <footer class="site-footer section-wrap">
       <a class="brand" href="#home" aria-label="Migo Rides home">
-        <img class="brand-logo" :src="isDark ? migoWordmarkDark : migoWordmark" alt="" />
+          <img class="migo-logo-mark" :src="migoMark" alt="" />
+        <img class="migo-logo-wordmark" :src="isDark ? migoWordmarkDark : migoWordmark" alt="" />
       </a>
       <p>Good rides. Good people. Coming soon.</p>
-      <span class="copyright">© 2026 Migo</span>
+      <span class="copyright">© 2026 Migo Technologies Limited</span>
     </footer>
   </template>
 </template>
