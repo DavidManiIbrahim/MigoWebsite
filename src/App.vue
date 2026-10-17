@@ -1,8 +1,8 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import logo from "./assets/logo.png";
-import logoOnDark from "./assets/logo(1).png";
-import migo from "./assets/migo-logo.png";
+import migoMark from "./assets/migo-mark.png";
+import migoWordmark from "./assets/migo-wordmark.png";
+import migoWordmarkDark from "./assets/migo-wordmark-dark.png";
 import locationPin from "./assets/Location pin.png";
 import LivePage from "./components/LivePage.vue";
 
@@ -69,10 +69,10 @@ function joinWaitlist() {
       aria-label="Migo is getting ready"
     >
       <div class="splash-brand">
-        <span class="splash-logo-lockup" aria-label="Migo">
-          <img class="splash-logo-wordmark" :src="migo" alt="" />
-          <img class="splash-logo-symbol" :src="isDark ? logoOnDark : logo" alt="" />
-        </span>
+        <!-- <span class="splash-logo-lockup" aria-label="Migo"> -->
+          <img class="splash-logo-mark" :src="migoMark" alt="" />
+          <img class="splash-logo-wordmark" :src="isDark ? migoWordmarkDark : migoWordmark" alt="" />
+        <!-- </span> -->
         <h1>Get moving with confidence.</h1>
         <div class="splash-dots" aria-hidden="true"><i></i><i></i><i></i></div>
         <p>YOUR CITY. YOUR MOVE.</p>
@@ -104,7 +104,7 @@ function joinWaitlist() {
   <template v-else>
     <header class="site-header">
       <a class="brand" href="#home" aria-label="Migo Rides home">
-        <img class="brand-logo" :src="isDark ? logoOnDark : logo" alt="" />
+        <img class="brand-logo" :src="isDark ? migoWordmarkDark : migoWordmark" alt="" />
       </a>
       <a class="waitlist-nav-link" href="/live" @click.prevent="navigateTo('/live')">
         Preview live page <span aria-hidden="true">↗</span>
@@ -237,7 +237,7 @@ function joinWaitlist() {
 
     <footer class="site-footer section-wrap">
       <a class="brand" href="#home" aria-label="Migo Rides home">
-        <img class="brand-logo" :src="isDark ? logoOnDark : logo" alt="" />
+        <img class="brand-logo" :src="isDark ? migoWordmarkDark : migoWordmark" alt="" />
       </a>
       <p>Good rides. Good people. Coming soon.</p>
       <span class="copyright">© 2026 Migo</span>

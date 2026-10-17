@@ -1,10 +1,10 @@
 <script setup>
-import logo from "../assets/logo.png";
-import logoOnDark from "../assets/logo(1).png";
-import migo from "../assets/migo-logo.png";
+import migoMark from "../assets/migo-mark.png";
+import migoWordmark from "../assets/migo-wordmark.png";
+import migoWordmarkDark from "../assets/migo-wordmark-dark.png";
 import googlePlayLogo from "../assets/Google Play Logo.png";
-import visual from "../assets/Hero Visual.png";
-import cityRideIllustration from "../assets/Illustration · City ride.png";
+import locationPin from "../assets/Location pin.png";
+import migoVan from "../assets/migo-van.svg";
 import routeIllustration from "../assets/Illustration · Phone route.png";
 import safetyIllustration from "../assets/Illustration · Safety shield.png";
 import { Check, ReceiptText, UserRoundCheck, ShieldCheck } from "@lucide/vue";
@@ -21,12 +21,12 @@ const emit = defineEmits(["toggle-theme", "open-waitlist"]);
     <header class="migo-live-header">
       <a class="brand" href="/" aria-label="Migo Rides home" @click.prevent="emit('open-waitlist')">
         <span class="migo-logo-lockup" aria-hidden="true">
-          <img class="migo-logo-wordmark" :src="migo" alt="" />
-          <img class="migo-logo-symbol" :src="isDark ? logoOnDark : logo" alt="" />
+          <img class="migo-logo-mark" :src="migoMark" alt="" />
+          <img class="migo-logo-wordmark" :src="isDark ? migoWordmarkDark : migoWordmark" alt="" />
         </span>
       </a>
       <nav class="migo-live-nav" aria-label="Main navigation">
-        <a href="#ride">Ride</a>
+        <a href="#why-migo">Why</a>
         <a href="#drivers">Drive</a>
         <a href="#safety">Safety</a>
         <a href="#help">Help</a>
@@ -69,13 +69,9 @@ const emit = defineEmits(["toggle-theme", "open-waitlist"]);
                 <span></span><span></span><span></span><span></span><span></span><span></span>
                 <span></span><span></span><span></span><span></span><span></span><span></span>
               </div>
+              <img class="migo-app-pin" :src="locationPin" alt="" />
               <div class="migo-app-road">
-                <div class="migo-app-car">
-                  <span class="migo-app-car-cabin"></span>
-                  <span class="migo-app-car-body"></span>
-                  <i class="migo-app-wheel migo-app-wheel-front"></i>
-                  <i class="migo-app-wheel migo-app-wheel-back"></i>
-                </div>
+                <img class="migo-app-car" :src="migoVan" alt="" />
               </div>
             </div>
           </figure>
@@ -209,13 +205,9 @@ const emit = defineEmits(["toggle-theme", "open-waitlist"]);
               <span></span><span></span><span></span><span></span><span></span><span></span>
               <span></span><span></span><span></span><span></span><span></span><span></span>
             </div>
+            <img class="migo-app-pin" :src="locationPin" alt="" />
             <div class="migo-app-road">
-              <div class="migo-app-car">
-                <span class="migo-app-car-cabin"></span>
-                <span class="migo-app-car-body"></span>
-                <i class="migo-app-wheel migo-app-wheel-front"></i>
-                <i class="migo-app-wheel migo-app-wheel-back"></i>
-              </div>
+              <img class="migo-app-car" :src="migoVan" alt="" />
             </div>
           </div>
         </div>
@@ -242,8 +234,8 @@ const emit = defineEmits(["toggle-theme", "open-waitlist"]);
         <div class="footer-brand-block">
           <a class="brand" href="/" aria-label="Migo Rides home" @click.prevent="emit('open-waitlist')">
             <span class="migo-logo-lockup" aria-hidden="true">
-              <img class="migo-logo-wordmark" :src="migo" alt="" />
-              <img class="migo-logo-symbol" :src="isDark ? logoOnDark : logo" alt="" />
+              <img class="migo-logo-mark" :src="migoMark" alt="" />
+              <img class="migo-logo-wordmark" :src="isDark ? migoWordmarkDark : migoWordmark" alt="" />
             </span>
           </a>
           <p>Get moving with MIGO.</p>
