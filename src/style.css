@@ -56,283 +56,175 @@ body {
   margin: 0;
 }
 
+/* ── Splash screen ──────────────────────────────────────────────────────────
+   Black stage → a yellow pulse blooms over the screen → the brand fades in.
+   Timeline: 0.40s hold · 1.30s grow · 0.12s hold · 0.35s shrink
+             · 0.15s pause · 0.50s fade-in · ≈3.2s total · 0.3s cross-fade out. */
 .splash-screen {
-  --splash-paper: #fffdf4;
-  --splash-building: #f2ebce;
-  --splash-window: #e5dba9;
-  --splash-yellow: #ffd400;
-  --splash-road: #10100e;
+  --splash-yellow: #ffd60a;
   position: fixed;
   z-index: 10000;
   inset: 0;
+  display: grid;
+  place-items: center;
   overflow: hidden;
-  color: #111;
-  background: linear-gradient(180deg, #fffefa 0%, var(--splash-paper) 64%, #fff0bb 100%);
-}
-:root[data-theme="dark"] .splash-screen {
-  --splash-paper: #23251f;
-  --splash-building: #34362e;
-  --splash-window: #50503d;
-  --splash-road: #0d0e0c;
   color: #fff;
-  background: linear-gradient(180deg, #181a16 0%, var(--splash-paper) 70%, #35321e 100%);
+  background: #0a0a0a;
+  font-family: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
 }
+
+/* Yellow circle — 55px at the centre, then it blooms past the viewport. */
+.splash-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: var(--splash-yellow);
+  transform: translate(-50%, -50%);
+  animation: splash-bloom 2170ms both;
+}
+
 .splash-brand {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(100% - 32px);
-  margin: clamp(105px, 21vh, 170px) auto 0;
   text-align: center;
+  opacity: 0;
+  animation: splash-fade-in 500ms ease-out 2320ms both;
 }
-.splash-logo {
-  position: relative;
-  bottom: 20px;
-  /* width: 50%; */
-  width: min(230px, 58vw);
-  height: 20vh;
-  object-fit: contain;
-}
-
-.header-logo{
-  width: 10%;
-  height: 5%;
-}
-.footer-logo{
-  width: 10%;
-}
-
 .splash-brand h1 {
-  margin: 20px 0 16px;
-  color: inherit;
-  font-family: "Space Grotesk", sans-serif;
+  margin: 10px 0 0;
+  color: #fff;
+  font-family: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
   font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 0;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   line-height: 1.2;
 }
+
+/* Loading dots — the active dot is yellow, stepping every 0.5s. */
 .splash-dots {
   display: flex;
-  gap: 9px;
+  gap: 10px;
+  margin-top: 26px;
 }
 .splash-dots i {
-  width: 9px;
+  width: 8px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: var(--splash-yellow);
-  animation: splash-pulse 700ms ease-in-out infinite alternate;
-}
-.splash-dots i:first-child {
-  background: currentColor;
-  animation-delay: 0ms;
+  background: #fff;
+  animation: splash-dot-step 1500ms linear infinite;
 }
 .splash-dots i:nth-child(2) {
-  animation-delay: 180ms;
+  animation-delay: 500ms;
 }
 .splash-dots i:nth-child(3) {
-  animation-delay: 360ms;
+  animation-delay: 1000ms;
 }
-.splash-brand p {
-  margin-top: 23px;
-  color: #77766d;
+
+/* "YOUR CITY. YOUR MOVE." — small, letter-spaced, pinned to the bottom. */
+.splash-cityline {
+  position: absolute;
+  right: 0;
+  bottom: clamp(28px, 6vh, 52px);
+  left: 0;
+  margin: 0;
+  color: rgb(255 255 255 / 60%);
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.6px;
+  font-weight: 600;
+  letter-spacing: 3.2px;
+  text-align: center;
+  opacity: 0;
+  animation: splash-fade-in 500ms ease-out 2320ms both;
 }
-:root[data-theme="dark"] .splash-brand p {
-  color: #b9b9aa;
-}
-.splash-city {
-  position: absolute;
-  bottom: 76px;
-  left: 50%;
-  display: flex;
-  align-items: flex-end;
-  gap: 12px;
-  width: min(calc(100% - 32px), 1280px);
-  height: min(23vh, 180px);
-  transform: translateX(-50%);
-}
-.splash-city span {
-  flex: 1;
-  min-width: 0;
-  height: 50%;
-  border-radius: 3px 3px 0 0;
-  background-color: var(--splash-building);
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent 0 16px,
-    var(--splash-window) 16px 21px,
-    transparent 21px 37px
-  );
-}
-.splash-city span:nth-child(3n) {
-  height: 38%;
-}
-.splash-city span:nth-child(3n + 1) {
-  height: 72%;
-}
-.splash-city span:nth-child(4n) {
-  height: 58%;
-}
-.splash-road {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 76px;
-  border-top: 2px solid rgb(255 255 255 / 45%);
-  background: var(--splash-road);
-}
-.splash-road::before {
-  position: absolute;
-  top: 18px;
-  right: 0;
-  left: 0;
-  height: 4px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--splash-yellow) 0 52px,
-    transparent 52px 102px
-  );
-  content: "";
-}
-.splash-car {
-  position: absolute;
-  bottom: 3px;
-  left: 0;
-  width: 140px;
-  height: 67px;
-  animation: splash-drive 2s cubic-bezier(0.45, 0, 0.65, 1) forwards;
-}
-.splash-pin {
-  position: absolute;
-  z-index: 4;
-  bottom: calc(100% - 2px);
-  left: 50px;
-  width: 40px;
-  height: 54px;
-  object-fit: contain;
-}
-.splash-car-body {
-  position: absolute;
-  z-index: 1;
-  bottom: 9px;
-  left: 8px;
-  width: 116px;
-  height: 33px;
-  border: 4px solid #111;
-  border-radius: 24px 26px 9px 9px;
-  background: var(--splash-yellow);
-}
-.splash-car-cabin {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 38px;
-  width: 58px;
-  height: 28px;
-  border: 4px solid #111;
-  border-bottom: 0;
-  border-radius: 22px 22px 0 0;
-  background: linear-gradient(90deg, var(--splash-yellow) 0 46%, #111 46% 53%, var(--splash-yellow) 53%);
-}
-.splash-wheel {
-  position: absolute;
-  z-index: 3;
-  bottom: 2px;
-  width: 26px;
-  aspect-ratio: 1;
-  border: 4px solid #111;
-  border-radius: 50%;
-  background: var(--splash-paper);
-}
-.splash-wheel-front {
-  right: 15px;
-}
-.splash-wheel-back {
-  left: 22px;
-}
+
 .splash-fade-leave-active {
-  transition: opacity 280ms ease;
+  transition: opacity 300ms ease;
 }
 .splash-fade-leave-to {
   opacity: 0;
 }
-@keyframes splash-drive {
-  from {
-    transform: translateX(-160px);
+
+/* 55px → screen coverage (145vmax clears the 141.42vmax max diagonal) → 0. */
+@keyframes splash-bloom {
+  0%,
+  18.43% {
+    width: 55px;
+    height: 55px;
+    animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
   }
-  to {
-    transform: translateX(calc(100vw + 160px));
+  78.34% {
+    width: 145vmax;
+    height: 145vmax;
+    animation-timing-function: linear;
+  }
+  83.87% {
+    width: 145vmax;
+    height: 145vmax;
+    animation-timing-function: ease-in;
+  }
+  100% {
+    width: 0;
+    height: 0;
   }
 }
-@keyframes splash-pulse {
+@keyframes splash-fade-in {
   from {
-    opacity: 0.45;
-    transform: scale(0.78);
+    opacity: 0;
   }
   to {
     opacity: 1;
-    transform: scale(1);
   }
 }
+@keyframes splash-dot-step {
+  0%,
+  33.33% {
+    background: var(--splash-yellow);
+  }
+  33.34%,
+  100% {
+    background: #fff;
+  }
+}
+
 @media (max-width: 600px) {
   .splash-brand h1 {
-    font-size: 23px;
+    font-size: 22px;
   }
-  .splash-city {
-    gap: 7px;
-    bottom: 66px;
-    height: 19vh;
+  .splash-dots {
+    gap: 8px;
+    margin-top: 22px;
   }
-  .splash-road {
-    height: 66px;
+  .splash-dots i {
+    width: 7px;
   }
-  .splash-car {
-    transform: scale(0.82);
-    transform-origin: bottom left;
+  .splash-cityline {
+    font-size: 9px;
+    letter-spacing: 2.4px;
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
+  .splash-pulse {
+    display: none;
+  }
+  .splash-brand,
+  .splash-cityline {
+    animation: none;
+    opacity: 1;
+  }
   .splash-dots i {
     animation: none;
   }
-  .splash-car {
-    animation: none;
-    transform: translateX(calc(50vw - 70px));
+  .splash-dots i:first-child {
+    background: var(--splash-yellow);
   }
   .splash-fade-leave-active {
     transition-duration: 1ms;
-  }
-}
-@media (max-height: 480px) {
-  .splash-brand {
-    margin-top: 7vh;
-  }
-  .splash-logo {
-    height: 44px;
-  }
-  .splash-brand h1 {
-    margin: 8px 0;
-    font-size: 20px;
-  }
-  .splash-brand p {
-    margin-top: 10px;
-  }
-  .splash-city {
-    display: none;
-  }
-  .splash-road {
-    height: 54px;
-  }
-  .splash-road::before {
-    top: 14px;
-  }
-  .splash-car {
-    bottom: 0;
   }
 }
 
@@ -2662,12 +2554,12 @@ h3 {
    alone keeps the mark and the wordmark at their true proportions. */
 .migo-logo-mark {
   width: auto;
-  height: 17px;
+  height: 27px;
   object-fit: contain;
 }
 .migo-logo-wordmark {
   width: auto;
-  height: 15px;
+  height: 5px;
   /* object-fit: contain; */
 }
 .splash-logo-mark {
@@ -2677,7 +2569,7 @@ h3 {
 }
 .splash-logo-wordmark {
   width: auto;
-  height: 33px;
+  height: 13px;
   object-fit: contain;}
 .splash-car {
   animation-duration: 4s;
@@ -2992,6 +2884,8 @@ h3 {
 }
 
 .migo-app-cta {
+  position: relative;
+  isolation: isolate;
   width: 100%;
   min-height: 0;
   margin: 0;
@@ -3000,8 +2894,23 @@ h3 {
   background: #10100f;
   color: #fff;
 }
+.migo-app-cta::after {
+  position: absolute;
+  z-index: 0;
+  right: 12%;
+  bottom: 7px;
+  left: 12%;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffd400;
+  filter: blur(20px);
+  opacity: 0.78;
+  content: "";
+  pointer-events: none;
+}
 .migo-app-cta-inner {
   position: relative;
+  z-index: 1;
   min-height: 185px;
   display: flex;
   align-items: center;
@@ -3010,6 +2919,7 @@ h3 {
   padding: 28px 38px;
   border-radius: 20px;
   background: #111;
+  box-shadow: 0 16px 36px -24px rgb(255 212 0 / 85%);
 }
 .migo-app-cta h2 {
   position: relative;
@@ -3445,29 +3355,24 @@ h3 {
   color: #f5f4ec;
 }
 .migo-logo-wordmark {
-  width: 126px;
-  height: 40px;
-  object-fit: cover;
-  object-position: center;
+  width: auto;
+  height: 18px;
+  object-fit: contain;
 }
 .footer-brand-block .migo-logo-wordmark {
-  width: 100px;
-  height: 32px;
+  height: 15px;
 }
 .splash-logo-wordmark {
-  width: min(300px, 68vw);
-  height: 64px;
-  object-fit: cover;
-  object-position: center;
+  width: auto;
+  height: 34px;
+  object-fit: contain;
 }
 @media (max-width: 600px) {
   .migo-logo-wordmark {
-    width: 100px;
-    height: 32px;
+    height: 17px;
   }
   .splash-logo-wordmark {
-    width: min(240px, 64vw);
-    height: 52px;
+    height: 26px;
   }
 }
 .benefit-card {
@@ -3508,5 +3413,152 @@ h3 {
   .migo-home-visual {
     width: min(100%, 430px);
     justify-self: center;
+  }
+}
+
+/* Site footer — larger text */
+.footer-brand-block > p {
+  font-size: 12px;
+}
+.footer-links strong {
+  font-size: 12px;
+}
+.footer-links a {
+  font-size: 11px;
+}
+.footer-legal {
+  font-size: 11px;
+}
+.site-footer p,
+.copyright {
+  font-size: 12px;
+}
+
+/* Sections — roomier vertical padding */
+.migo-home-hero-inner {
+  padding-block: 64px;
+}
+.migo-why {
+  padding-block: 64px;
+}
+.migo-process-inner,
+.migo-safety-inner,
+.migo-faq-inner {
+  padding-block: 64px;
+}
+.migo-app-cta {
+  padding-block: 40px;
+}
+.migo-driver-panel {
+  padding-block: 76px;
+}
+.migo-site-footer-inner {
+  padding-block: 34px 26px;
+}
+.hero {
+  padding-top: 72px;
+  padding-bottom: 88px;
+}
+.site-footer {
+  padding-block: 26px;
+}
+
+@media (max-width: 800px) {
+  .hero {
+    padding-top: 56px;
+    padding-bottom: 64px;
+  }
+  .migo-driver-panel {
+    padding-block: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .migo-home-hero-inner {
+    padding-block: 48px 44px;
+  }
+  .migo-why {
+    padding-block: 48px;
+  }
+  .migo-process-inner,
+  .migo-safety-inner,
+  .migo-faq-inner {
+    padding-block: 48px;
+  }
+  .migo-app-cta {
+    padding-block: 28px;
+  }
+  .migo-driver-panel {
+    padding: 34px 22px;
+  }
+  .migo-site-footer-inner {
+    padding-block: 28px 22px;
+  }
+  .hero {
+    padding-top: 44px;
+    padding-bottom: 52px;
+  }
+  .site-footer {
+    padding-block: 22px;
+  }
+  .footer-legal {
+    font-size: 10px;
+  }
+  .site-footer p,
+  .copyright {
+    font-size: 11px;
+  }
+}
+
+/* Drive with MIGO — larger text (same +3px scale-up as the footer) */
+.driver-tag {
+  font-size: 11px;
+}
+.driver-intro h2 {
+  font-size: 34px;
+}
+.driver-intro p {
+  font-size: 14px;
+}
+.driver-benefits p {
+  min-height: 46px;
+  padding: 9px 14px;
+  font-size: 12px;
+}
+.driver-benefits p > svg {
+  width: 20px;
+  height: 20px;
+}
+.driver-benefits p > span {
+  width: 19px;
+  height: 19px;
+}
+
+/* Hero phone — sits on the bottom edge of the hero, no gap under it.
+   -64px / -44px cancel the hero-inner's bottom padding (64px desktop, 44px mobile).
+   -12.17% trims the phone PNG's transparent bottom band (73 of 600px). */
+.migo-home-visual {
+  align-self: end;
+  margin-bottom: -64px;
+}
+.migo-home-visual img {
+  margin-bottom: -12.17%;
+}
+
+@media (max-width: 600px) {
+  .driver-tag {
+    font-size: 10px;
+  }
+  .driver-intro h2 {
+    font-size: 31px;
+  }
+  .driver-intro p {
+    font-size: 13px;
+  }
+  .driver-benefits p {
+    font-size: 11px;
+  }
+  .migo-home-visual {
+    margin-bottom: -44px;
   }
 }
