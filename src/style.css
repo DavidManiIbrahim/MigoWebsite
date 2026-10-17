@@ -62,15 +62,24 @@ body {
              · 0.15s pause · 0.50s fade-in · ≈3.2s total · 0.3s cross-fade out. */
 .splash-screen {
   --splash-yellow: #ffd60a;
+  --splash-bg: #fbfaf6;
+  --splash-ink: #171816;
+  --splash-muted: rgb(23 24 22 / 60%);
   position: fixed;
   z-index: 10000;
   inset: 0;
   display: grid;
   place-items: center;
   overflow: hidden;
-  color: #fff;
-  background: #0a0a0a;
+  color: var(--splash-ink);
+  background: var(--splash-bg);
   font-family: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+:root[data-theme="dark"] .splash-screen {
+  --splash-bg: #0a0a0a;
+  --splash-ink: #fff;
+  --splash-muted: rgb(255 255 255 / 60%);
 }
 
 /* Yellow circle — 55px at the centre, then it blooms past the viewport. */
@@ -98,7 +107,7 @@ body {
 }
 .splash-brand h1 {
   margin: 10px 0 0;
-  color: #fff;
+  color: var(--splash-ink);
   font-family: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
   font-size: 28px;
   font-weight: 800;
@@ -116,7 +125,7 @@ body {
   width: 8px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: #fff;
+  background: var(--splash-ink);
   animation: splash-dot-step 1500ms linear infinite;
 }
 .splash-dots i:nth-child(2) {
@@ -133,7 +142,7 @@ body {
   bottom: clamp(28px, 6vh, 52px);
   left: 0;
   margin: 0;
-  color: rgb(255 255 255 / 60%);
+  color: var(--splash-muted);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 3.2px;
@@ -187,7 +196,7 @@ body {
   }
   33.34%,
   100% {
-    background: #fff;
+    background: var(--splash-ink);
   }
 }
 

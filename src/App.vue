@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, reactive, ref } from "vue";
 import { ConvexClient } from "convex/browser";
+import { api } from "../convex/_generated/api.js";
 import migoMark from "./assets/migo-mark.png";
 import migoWordmark from "./assets/migo-wordmark.png";
 import migoWordmarkDark from "./assets/migo-wordmark-dark.png";
@@ -75,7 +76,7 @@ async function joinWaitlist() {
 
   submitting.value = true;
   try {
-    const result = await convex.mutation("waitlist:join", {
+    const result = await convex.mutation(api.waitlist.join, {
       name: form.name.trim(),
       email: form.email.trim(),
       phone: form.phone.trim(),
@@ -109,7 +110,7 @@ async function joinWaitlist() {
       <div class="splash-brand">
         <span class="splash-logo-lockup" aria-hidden="true">
           <img class="splash-logo-mark" :src="migoMark" alt="" />
-          <img class="splash-logo-wordmark" :src="migoWordmarkDark" alt="" />
+          <img class="splash-logo-wordmark" :src="isDark ? migoWordmarkDark : migoWordmark" alt="" />
         </span>
         <h1>Get moving with confidence.</h1>
         <div class="splash-dots" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -252,9 +253,7 @@ async function joinWaitlist() {
               Thanks for joining as a {{ rideType.toLowerCase() }}. We’ll be in
               touch when Migo is getting close to your city.
             </p>
-            <a href="#how-it-works"
-              >Get to know Migo <span aria-hidden="true">→</span></a
-            >
+            
           </div>
         </div>
       </aside>
