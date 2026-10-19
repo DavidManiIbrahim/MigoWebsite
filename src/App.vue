@@ -7,6 +7,7 @@ import migoMark from "./assets/migo-mark.png";
 import migoWordmark from "./assets/migo-wordmark.png";
 import migoWordmarkDark from "./assets/migo-wordmark-dark.png";
 import LivePage from "./components/LivePage.vue";
+import AdminPage from "./components/AdminPage.vue";
 
 const defaultPage = "waitlist";
 const rideType = ref("Rider");
@@ -16,19 +17,23 @@ const showSplash = ref(true);
 const currentPage = ref(resolvePage(window.location.pathname));
 
 const siteUrl = (import.meta.env.VITE_SITE_URL || window.location.origin).replace(/\/$/, "");
-const pageUrl = computed(() => `${siteUrl}${currentPage.value === "live" ? "/live" : "/"}`);
+const pageUrl = computed(() => `${siteUrl}${currentPage.value === "live" ? "/live" : currentPage.value === "admin" ? "/admin" : "/"}`);
 const pageTitle = computed(() => currentPage.value === "live"
   ? "MIGO Rides | On-demand rides, made simple"
-  : "MIGO Rides | Join the launch waitlist");
+  : currentPage.value === "admin"
+    ? "MIGO Admin | Beta signups"
+    : "MIGO Rides | Join the launch waitlist");
 const pageDescription = computed(() => currentPage.value === "live"
   ? "Get moving with MIGO. Request a ride in a few taps, see your driver and fare upfront, and track every trip."
-  : "MIGO is almost here. Join the waitlist for early access to a better way to get around your city.");
+  : currentPage.value === "admin"
+    ? "Private MIGO beta signup administration."
+    : "MIGO is almost here. Join the waitlist for early access to a better way to get around your city.");
 
 useSeoMeta({
   title: pageTitle,
   description: pageDescription,
-  robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-  googlebot: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  robots: computed(() => currentPage.value === "admin" ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"),
+  googlebot: computed(() => currentPage.value === "admin" ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"),
   ogType: "website",
   ogSiteName: "MIGO Rides",
   ogTitle: pageTitle,
@@ -56,6 +61,7 @@ const convex = convexUrl ? new ConvexClient(convexUrl) : null;
 function resolvePage(pathname) {
   const path = pathname.replace(/\/+$/, "") || "/";
   if (path === "/live") return "live";
+  if (path === "/admin") return "admin";
   if (path === "/waitlist") return "waitlist";
   return defaultPage;
 }
@@ -152,8 +158,13 @@ async function joinWaitlist() {
     </div>
   </Transition>
 
+  <AdminPage
+    v-if="currentPage === 'admin'"
+    :convex="convex"
+  />
+
   <LivePage
-    v-if="currentPage === 'live'"
+    v-else-if="currentPage === 'live'"
     :is-dark="isDark"
     @toggle-theme="toggleTheme"
     @open-waitlist="navigateTo('/waitlist')"

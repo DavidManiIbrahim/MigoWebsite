@@ -1,5 +1,7 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
+import { action, internalQuery, mutation } from "./_generated/server";
+import { internal } from "./_generated/api";
+import schema from "./schema.js";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -50,5 +52,34 @@ export const join = mutation({
     });
 
     return { ok: true, duplicate: false };
+  },
+});
+
+
+// Embedded admin credentials are checked only by Convex, never shipped to the browser.
+const ADMIN_USERNAME = "migo-admin";
+const ADMIN_PASSWORD = "R4!mQ8#vZ2@kP6xN9$wT3cL7";
+
+export const adminLogin = action({
+  args: { username: v.string(), password: v.string() },
+  returns: v.union(
+    v.object({ ok: v.literal(false), error: v.string() }),
+    v.object({ ok: v.literal(true), entries: v.array(schema.doc("waitlist")) }),
+  ),
+  handler: async (ctx, args) => {
+    if (args.username !== ADMIN_USERNAME || args.password !== ADMIN_PASSWORD) {
+      return { ok: false, error: "Incorrect username or password." };
+    }
+
+    const entries = await ctx.runQuery(internal.waitlist.listForAdmin, {});
+    return { ok: true, entries };
+  },
+});
+
+export const listForAdmin = internalQuery({
+  args: {},
+  returns: v.array(schema.doc("waitlist")),
+  handler: async (ctx) => {
+    return await ctx.db.query("waitlist").order("desc").take(500);
   },
 });
