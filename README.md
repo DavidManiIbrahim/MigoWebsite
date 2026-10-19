@@ -25,3 +25,12 @@ Set both variables in the hosting provider's production build environment as wel
 - `npm run dev` starts the local Vite server.
 - `npm run build` creates the production site in `dist/`.
 - `npm run preview` serves the production build locally.
+
+
+ADMIN
+
+Migo Website
+Username:
+migo-admin
+Password:
+R4!mQ8#vZ2@kP6xN9$wT3cL7
