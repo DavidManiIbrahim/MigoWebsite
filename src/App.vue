@@ -1,5 +1,6 @@
 <script setup>
-import { onMounted, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
+import { useHead, useSeoMeta } from "@unhead/vue";
 import { ConvexClient } from "convex/browser";
 import { api } from "../convex/_generated/api.js";
 import migoMark from "./assets/migo-mark.png";
@@ -13,6 +14,37 @@ const submitted = ref(false);
 const isDark = ref(false);
 const showSplash = ref(true);
 const currentPage = ref(resolvePage(window.location.pathname));
+
+const siteUrl = (import.meta.env.VITE_SITE_URL || window.location.origin).replace(/\/$/, "");
+const pageUrl = computed(() => `${siteUrl}${currentPage.value === "live" ? "/live" : "/"}`);
+const pageTitle = computed(() => currentPage.value === "live"
+  ? "MIGO Rides | On-demand rides, made simple"
+  : "MIGO Rides | Join the launch waitlist");
+const pageDescription = computed(() => currentPage.value === "live"
+  ? "Get moving with MIGO. Request a ride in a few taps, see your driver and fare upfront, and track every trip."
+  : "MIGO is almost here. Join the waitlist for early access to a better way to get around your city.");
+
+useSeoMeta({
+  title: pageTitle,
+  description: pageDescription,
+  robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  googlebot: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  ogType: "website",
+  ogSiteName: "MIGO Rides",
+  ogTitle: pageTitle,
+  ogDescription: pageDescription,
+  ogUrl: pageUrl,
+  ogImage: `${siteUrl}/migoapps.jpg`,
+  ogImageAlt: "MIGO Rides app",
+  twitterCard: "summary_large_image",
+  twitterTitle: pageTitle,
+  twitterDescription: pageDescription,
+  twitterImage: `${siteUrl}/migoapps.jpg`,
+});
+
+useHead({
+  link: [{ rel: "canonical", href: pageUrl }],
+});
 
 // Waitlist form -> Convex. `npx convex dev` writes VITE_CONVEX_URL to .env.local.
 const form = reactive({ name: "", email: "", phone: "", city: "" });
