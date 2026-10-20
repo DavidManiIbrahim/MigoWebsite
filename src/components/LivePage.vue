@@ -1,5 +1,5 @@
 <script setup>
-import migoMark from "../assets/migo-mark.png";
+import migoMark from "../assets/migo-mark.webp";
 import migoWordmark from "../assets/migo-wordmark.png";
 import phone from "/migophone-nobg.png";
 import migoWordmarkDark from "../assets/migo-wordmark-dark.png";

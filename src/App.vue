@@ -3,7 +3,7 @@ import { computed, onMounted, reactive, ref } from "vue";
 import { useHead, useSeoMeta } from "@unhead/vue";
 import { ConvexClient } from "convex/browser";
 import { api } from "../convex/_generated/api.js";
-import migoMark from "./assets/migo-mark.png";
+import migoMark from "./assets/migo-mark.webp";
 import migoWordmark from "./assets/migo-wordmark.png";
 import migoWordmarkDark from "./assets/migo-wordmark-dark.png";
 import LivePage from "./components/LivePage.vue";

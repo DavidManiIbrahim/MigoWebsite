@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { api } from "../../convex/_generated/api.js";
-import migoMark from "../assets/migo-mark.png";
+import migoMark from "../assets/migo-mark.webp";
 import migoWordmark from "../assets/migo-wordmark.png";
 
 const props = defineProps({ convex: { type: Object, default: null } });
