@@ -1,0 +1,29 @@
+# MIGO Rides
+
+> MIGO is an on-demand rideshare platform built for transparent, safe, and reliable city transportation. Riders get upfront fares, verified driver credentials, and live trip tracking. Drivers enjoy direct passenger payments, zero surprise commissions, and a 7-day free trial on an affordable subscription model.
+
+## Core Links & Pages
+- [Official Website & Waitlist](https://migotech.org/): Join early waitlist for riders and drivers.
+- [Live Features & App Overview](https://migotech.org/live): Explore core features, safety protocols, driver benefits, and how MIGO works.
+- [Driver Registration & Information](https://migotech.org/live#drivers): Information on driving with MIGO, driver benefits, 7-day free trial, and direct passenger payments.
+- [Safety & Trust Standards](https://migotech.org/live#safety): Verified vehicle plates, trip sharing, and emergency contacts.
+- [FAQ](https://migotech.org/live#faq): Answers to common questions regarding ride requests, payments, upfront fares, and support.
+
+## Key Features
+- **Upfront Fare Estimates**: Transparent pricing calculated before confirming a ride with zero hidden surcharges.
+- **Driver Transparency**: Riders see driver identity, profile photo, ratings, vehicle model, and license plate before the driver arrives.
+- **Live Trip Tracking**: Real-time GPS mapping and route updates from pickup to destination.
+- **Safety Shield**: Trip sharing with trusted contacts, in-app emergency contact integration, and verified driver background checks.
+- **Direct Driver Earnings**: Drivers receive 100% of the fare directly from passengers with a simple flat subscription instead of high per-trip commissions.
+- **Cashless & Secure Payments**: Seamless digital payments in-app after the ride is completed.
+
+## Target Audience
+- **Riders**: Commuters, travelers, and city residents seeking reliable, fair-priced, and secure transportation.
+- **Drivers**: Professional drivers and vehicle owners seeking fair earnings, independence, and direct passenger payouts without hefty platform commission cuts.
+
+## Organization
+- Company: Migo Technologies Limited
+- Website: https://migotech.org/
+- Email: hello@migoweb.com
+- Status: Launch waitlist active (early access available)
+- Mobile Apps: Google Play Store & Apple App Store (Coming Soon / Free Download)

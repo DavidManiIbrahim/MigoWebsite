@@ -1,4 +1,97 @@
+# ==============================================================================
+# MIGO Rides Robots.txt - Optimized for Google & AI Search Crawlers
+# https://migotech.org/
+# ==============================================================================
+
+# Default rule for all web crawlers
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
+# OpenAI Crawlers (ChatGPT Search, GPTBot, Browsing)
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+
+# Anthropic Claude Crawlers
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /admin
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /admin
+
+# Perplexity AI Crawlers
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+
+# Google Crawlers (Googlebot, Gemini, Google-Extended)
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+
+# Apple Intelligence & Applebot
+User-agent: Applebot
+Allow: /
+Disallow: /admin
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin
+
+# Microsoft Bing & Copilot
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+
+# Meta AI & Social Crawlers
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /admin
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Other AI Crawlers
+User-agent: cohere-ai
+Allow: /
+Disallow: /admin
+
+User-agent: Bytespider
+Allow: /
+Disallow: /admin
+
+# AI documentation & knowledge index
+# LLM Context: https://migotech.org/llms.txt
+# Full LLM Context: https://migotech.org/llms-full.txt
+
+# Sitemaps
 Sitemap: https://migotech.org/sitemap.xml

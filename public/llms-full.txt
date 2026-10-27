@@ -1,0 +1,56 @@
+# MIGO Rides - Complete AI Knowledge Base & Context
+
+## 1. Executive Summary
+MIGO (operated by Migo Technologies Limited, https://migotech.org/) is a modern mobility and rideshare platform designed to empower both riders and drivers with transparency, safety, and fairness. Unlike legacy rideshare platforms that take large cuts (25-30%+) from drivers and surprise riders with hidden fees or surge pricing, MIGO operates on a transparent model: riders see upfront fixed fare estimates and pay digitally, while drivers keep their trip earnings through a predictable subscription model with an initial 7-day free trial.
+
+## 2. Core Value Propositions
+
+### For Riders:
+- **Upfront Fare Certainty**: Fares are clearly shown before a trip is booked. No surprises at destination.
+- **Driver Verification**: Every driver is vetted. Riders view the driver's full name, profile photo, passenger rating, vehicle make/model, and license plate number prior to pickup.
+- **Safety Shield**:
+  - Live route tracking that can be shared in real time with friends or family.
+  - One-tap emergency contacts stored securely within the app.
+  - Zero-cash policy ensures drivers and riders are safeguarded against theft or disputes.
+- **Reliability**: Quick hailing from smartphones with GPS pickup and route optimization.
+
+### For Drivers:
+- **Keep 100% of Fare**: Passengers pay drivers directly.
+- **Flat In-App Subscription**: Instead of punishing drivers with steep commission percentages on every hard-earned trip, MIGO charges a modest periodic subscription fee renewed directly within the driver app.
+- **7-Day Free Trial**: Approved drivers can start driving and earning immediately with a 7-day risk-free trial.
+- **Local Dispatch**: Immediate ride requests dispatched to nearby drivers.
+
+## 3. How MIGO Works (Step-by-Step)
+1. **Set Destination**: Rider enters their drop-off point and confirms pickup location.
+2. **Review Upfront Quote**: The app displays an accurate fare estimate and nearby driver availability.
+3. **Inspect Driver Details**: Once matched, the rider receives driver identity, rating, car details, and live arrival time.
+4. **Ride & Live Tracking**: Follow progress on the live GPS map.
+5. **Secure Payment**: Seamless in-app digital payment upon trip completion. Cash is never exchanged.
+
+## 4. Frequently Asked Questions (FAQ)
+
+### Q: What is MIGO?
+A: MIGO is an on-demand rideshare app providing safe, reliable, and upfront-priced urban transportation for passengers, and fair direct earnings for drivers.
+
+### Q: Where is MIGO available?
+A: MIGO is actively launching across major urban centers, starting in East Africa (including Kenya, +254 regional dialing code support) and expanding globally. Users can join the early-access waitlist on https://migotech.org/.
+
+### Q: How do riders request a ride?
+A: Riders open the MIGO app on iOS or Android, enter their destination, verify their pickup point, review the upfront fare, and tap to confirm a ride.
+
+### Q: How do payments work?
+A: All payments are processed securely within the MIGO app through authorized digital payment gateways. Drivers do not accept cash.
+
+### Q: How do drivers sign up and earn?
+A: Drivers download the MIGO Driver app, upload required documentation (valid license, vehicle inspection, insurance), and upon verification receive a 7-day free trial. Passengers pay drivers directly.
+
+### Q: How can users join the waitlist?
+A: Visit https://migotech.org/ and submit your name, email, phone number, and city as either a Rider or a Driver.
+
+## 5. Contact & Company Information
+- Company: Migo Technologies Limited
+- URL: https://migotech.org/
+- Support: hello@migoweb.com
+- Waitlist Portal: https://migotech.org/waitlist
+- Live Features Portal: https://migotech.org/live
+- Copyright: (c) 2026 Migo Technologies Limited
