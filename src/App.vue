@@ -16,22 +16,24 @@ const isDark = ref(false);
 const showSplash = ref(true);
 const currentPage = ref(resolvePage(window.location.pathname));
 
-const siteUrl = (import.meta.env.VITE_SITE_URL || window.location.origin).replace(/\/$/, "");
+const defaultSiteUrl = "https://migotech.org";
+const siteUrl = (import.meta.env.VITE_SITE_URL || (typeof window !== "undefined" && window.location.origin && !window.location.origin.includes("localhost") ? window.location.origin : defaultSiteUrl)).replace(/\/$/, "");
 const pageUrl = computed(() => `${siteUrl}${currentPage.value === "live" ? "/live" : currentPage.value === "admin" ? "/admin" : "/"}`);
 const pageTitle = computed(() => currentPage.value === "live"
-  ? "MIGO Rides | On-demand rides, made simple"
+  ? "MIGO Rides | On-Demand Rideshare, Upfront Pricing & Verified Drivers"
   : currentPage.value === "admin"
-    ? "MIGO Admin | Beta signups"
-    : "MIGO Rides | Join the launch waitlist");
+    ? "MIGO Admin | Beta Signups"
+    : "MIGO Rides | Smart On-Demand Rideshare - Join the Launch Waitlist");
 const pageDescription = computed(() => currentPage.value === "live"
-  ? "Get moving with MIGO. Request a ride in a few taps, see your driver and fare upfront, and track every trip."
+  ? "Get moving with MIGO. Request rides with upfront fare transparency, vetted drivers, and live GPS tracking. Drivers keep 100% of earnings on a simple subscription."
   : currentPage.value === "admin"
     ? "Private MIGO beta signup administration."
-    : "MIGO is almost here. Join the waitlist for early access to a better way to get around your city.");
+    : "MIGO is almost here. Join the waitlist for early access to upfront fare estimates, verified drivers, live trip tracking, and direct driver earnings.");
 
 useSeoMeta({
   title: pageTitle,
   description: pageDescription,
+  keywords: "MIGO rides, MIGO, rideshare app, upfront fare taxi, safe cab, driver subscription app, Kenya rideshare, book ride online",
   robots: computed(() => currentPage.value === "admin" ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"),
   googlebot: computed(() => currentPage.value === "admin" ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"),
   ogType: "website",
