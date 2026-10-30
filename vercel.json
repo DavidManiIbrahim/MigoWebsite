@@ -1,17 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.migotech.org"
-        }
-      ],
-      "destination": "https://migotech.org/:path*",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     { "source": "/admin", "destination": "/index.html" },
     { "source": "/live", "destination": "/index.html" },

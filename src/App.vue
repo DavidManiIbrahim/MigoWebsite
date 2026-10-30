@@ -8,6 +8,13 @@ import migoWordmark from "./assets/migo-wordmark.png";
 import migoWordmarkDark from "./assets/migo-wordmark-dark.png";
 import LivePage from "./components/LivePage.vue";
 import AdminPage from "./components/AdminPage.vue";
+import ConsentBanner from "./components/ConsentBanner.vue";
+import {
+  getAnalyticsConsent,
+  initAnalytics,
+  setAnalyticsConsent,
+  track,
+} from "./analytics";
 
 const defaultPage = "waitlist";
 const rideType = ref("Rider");
@@ -15,6 +22,7 @@ const submitted = ref(false);
 const isDark = ref(false);
 const showSplash = ref(true);
 const currentPage = ref(resolvePage(window.location.pathname));
+const analyticsConsent = ref(getAnalyticsConsent());
 
 const defaultSiteUrl = "https://migotech.org";
 const siteUrl = (import.meta.env.VITE_SITE_URL || (typeof window !== "undefined" && window.location.origin && !window.location.origin.includes("localhost") ? window.location.origin : defaultSiteUrl)).replace(/\/$/, "");
@@ -82,7 +90,18 @@ function applyTheme() {
   document.documentElement.dataset.theme = isDark.value ? "dark" : "light";
 }
 
+function openWaitlist() {
+  track("waitlist_cta_clicked", { source: "live_page" });
+  navigateTo("/waitlist");
+}
+
+function decideAnalyticsConsent(granted) {
+  analyticsConsent.value = granted ? "granted" : "denied";
+  setAnalyticsConsent(granted);
+}
+
 onMounted(() => {
+  initAnalytics();
   const savedTheme = window.localStorage.getItem("migo-theme");
   isDark.value = savedTheme
     ? savedTheme === "dark"
@@ -115,6 +134,7 @@ async function joinWaitlist() {
   }
 
   submitting.value = true;
+  track("waitlist_submitted", { role: rideType.value });
   try {
     const result = await convex.mutation(api.waitlist.join, {
       name: form.name.trim(),
@@ -124,12 +144,15 @@ async function joinWaitlist() {
       role: rideType.value,
     });
     if (!result.ok) {
+      track("waitlist_signup_failed", { role: rideType.value });
       formError.value = result.error;
       return;
     }
     submitted.value = true;
+    track("waitlist_signup_completed", { role: rideType.value });
   } catch (error) {
     console.error(error);
+    track("waitlist_signup_failed", { role: rideType.value });
     formError.value = "Something went wrong. Please try again.";
   } finally {
     submitting.value = false;
@@ -169,7 +192,7 @@ async function joinWaitlist() {
     v-else-if="currentPage === 'live'"
     :is-dark="isDark"
     @toggle-theme="toggleTheme"
-    @open-waitlist="navigateTo('/waitlist')"
+    @open-waitlist="openWaitlist"
   />
 
   <template v-else>
@@ -320,4 +343,9 @@ async function joinWaitlist() {
       <span class="copyright">© 2026 Migo Technologies Limited</span>
     </footer>
   </template>
+
+  <ConsentBanner
+    v-if="analyticsConsent === null && currentPage !== 'admin'"
+    @decision="decideAnalyticsConsent"
+  />
 </template>

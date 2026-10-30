@@ -51,7 +51,7 @@ function formatDate(timestamp) {
 </script>
 
 <template>
-  <main class="admin-page">
+  <main class="admin-page ph-no-capture">
     <a class="admin-brand" href="/" aria-label="MIGO Admin home">
       <span class="admin-logo-lockup"><img class="admin-brand-mark" :src="migoMark" alt="" /><img class="admin-brand-wordmark" :src="migoWordmark" alt="MIGO" /></span>
       <span class="admin-brand-label">ADMIN</span>
