@@ -2,6 +2,7 @@
   "rewrites": [
     { "source": "/admin", "destination": "/index.html" },
     { "source": "/live", "destination": "/index.html" },
+    { "source": "/privacy", "destination": "/index.html" },
     { "source": "/waitlist", "destination": "/index.html" }
   ],
   "headers": [
