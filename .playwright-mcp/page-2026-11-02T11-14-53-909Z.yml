@@ -1,0 +1,171 @@
+- generic [ref=f1e2]:
+  - status "Migo is getting ready" [ref=f1e3]:
+    - heading "Get moving with confidence." [level=1] [ref=f1e7]
+    - paragraph [ref=f1e12]: YOUR CITY. YOUR MOVE.
+  - generic [ref=f1e13]:
+    - banner [ref=f1e14]:
+      - link "Migo Rides home" [ref=f1e15] [cursor=pointer]:
+        - /url: /
+      - navigation "Main navigation" [ref=f1e17]:
+        - link "Why" [ref=f1e18] [cursor=pointer]:
+          - /url: "#why-migo"
+        - link "Drive" [ref=f1e19] [cursor=pointer]:
+          - /url: "#drivers"
+        - link "Safety" [ref=f1e20] [cursor=pointer]:
+          - /url: "#safety"
+        - link "Help" [ref=f1e21] [cursor=pointer]:
+          - /url: "#help"
+      - generic [ref=f1e22]:
+        - button "Switch to dark mode" [ref=f1e23] [cursor=pointer]
+        - link "Download app" [ref=f1e26] [cursor=pointer]:
+          - /url: "#download"
+    - main [ref=f1e27]:
+      - generic [ref=f1e30]:
+        - heading "Get moving with MIGO" [level=1] [ref=f1e31]: Get movingwith MIGO
+        - paragraph [ref=f1e32]: Request a ride in a few taps, see your driver and fare upfront, and track every trip.
+        - generic [ref=f1e33]:
+          - strong [ref=f1e34]: Get the app
+          - generic [ref=f1e35]:
+            - link "Download the MIGO app on the App Store" [ref=f1e36] [cursor=pointer]:
+              - /url: "#download"
+              - img "Download on the App Store" [ref=f1e37]
+            - link "Get the MIGO app on Google Play" [ref=f1e38] [cursor=pointer]:
+              - /url: "#download"
+              - generic [ref=f1e39]:
+                - generic [ref=f1e40]: GET IT ON
+                - generic [ref=f1e41]: Google Play
+          - generic [ref=f1e42]: Free on Android and iOS
+      - generic [ref=f1e45]:
+        - heading "Why MIGO" [level=2] [ref=f1e46]
+        - paragraph [ref=f1e47]: Clear pricing, driver details, and live tracking make every ride easier to request, follow, and finish.
+        - generic [ref=f1e48]:
+          - article [ref=f1e49]:
+            - heading "Know your fare" [level=3] [ref=f1e50]
+            - paragraph [ref=f1e51]: Get a fare estimate before you request, then track your ride live from pickup to drop-off.
+            - link "Learn about fares" [ref=f1e52] [cursor=pointer]:
+              - /url: "#download"
+          - article [ref=f1e55]:
+            - heading "Meet your driver" [level=3] [ref=f1e56]
+            - paragraph [ref=f1e57]: See your driver’s name, vehicle details and arrival time before they pull up.
+            - link "Learn about MIGO drivers" [ref=f1e58] [cursor=pointer]:
+              - /url: "#drivers"
+          - article [ref=f1e63]:
+            - heading "Ride with confidence" [level=3] [ref=f1e64]
+            - paragraph [ref=f1e65]: Approved drivers, emergency contacts and safety support built into every trip.
+            - link "Learn about ride safety" [ref=f1e66] [cursor=pointer]:
+              - /url: "#safety"
+      - generic [ref=f1e71]:
+        - generic [ref=f1e72]:
+          - generic [ref=f1e73]:
+            - heading "How it works" [level=2] [ref=f1e74]
+            - paragraph [ref=f1e75]: Request a ride, confirm your fare and driver, then pay securely in the app after the trip.
+          - img "A route traced between two places on a phone" [ref=f1e76]
+        - generic [ref=f1e77]:
+          - article [ref=f1e78]:
+            - generic [ref=f1e79]: "1"
+            - heading "Set your destination" [level=3] [ref=f1e80]
+            - paragraph [ref=f1e81]: Search where you want to go and confirm your pickup location before you request.
+          - article [ref=f1e82]:
+            - generic [ref=f1e83]: "2"
+            - heading "See your fare and driver" [level=3] [ref=f1e84]
+            - paragraph [ref=f1e85]: Get a fare estimate upfront, then inspect your driver’s name, rating, vehicle and plate before pickup.
+          - article [ref=f1e86]:
+            - generic [ref=f1e87]: "3"
+            - heading "Ride and pay in the app" [level=3] [ref=f1e88]
+            - paragraph [ref=f1e89]: Follow your trip live, then pay in the app after the ride. Drivers never take cash.
+      - generic [ref=f1e91]:
+        - heading "FAQ" [level=2] [ref=f1e92]
+        - paragraph [ref=f1e93]: Common questions about requesting a ride, payment and getting help.
+        - generic [ref=f1e94]:
+          - article [ref=f1e95]:
+            - heading "How do I request a ride?" [level=3] [ref=f1e96]
+            - paragraph [ref=f1e97]: Open the app, search your destination, confirm your pickup location, and request a ride. You’ll see a fare estimate before you confirm.
+          - article [ref=f1e98]:
+            - heading "How do I pay for my ride?" [level=3] [ref=f1e99]
+            - paragraph [ref=f1e100]: Pay in the app after your ride using our secure payment gateway. Drivers cannot accept cash, so show your receipt if asked.
+          - article [ref=f1e101]:
+            - heading "Where can I see my fare estimate?" [level=3] [ref=f1e102]
+            - paragraph [ref=f1e103]: You can see a fare estimate before you request a ride, and the final trip details are available after the ride is complete.
+          - article [ref=f1e104]:
+            - heading "How do I get trip help?" [level=3] [ref=f1e105]
+            - paragraph [ref=f1e106]: You can get trip help from inside the app after the ride is complete, or visit the help center for more support.
+      - generic [ref=f1e108]:
+        - generic [ref=f1e109]:
+          - generic [ref=f1e110]:
+            - heading "User safety" [level=2] [ref=f1e111]
+            - paragraph [ref=f1e112]: Use the app to verify your ride, share details with someone you trust, and get help when you need it.
+          - img "Shield with a checkmark" [ref=f1e113]
+        - generic [ref=f1e114]:
+          - article [ref=f1e115]:
+            - generic [aria-hidden] [ref=f1e116]: ✓
+            - heading "Check the plate and driver" [level=3] [ref=f1e117]
+            - paragraph [ref=f1e118]: Before you get in, confirm the driver’s name, vehicle details and plate match what the app shows.
+          - article [ref=f1e119]:
+            - generic [aria-hidden] [ref=f1e120]: ✓
+            - heading "Share your trip" [level=3] [ref=f1e121]
+            - paragraph [ref=f1e122]: Share trip details with a friend or family member so they can see where you are and where you’re headed.
+          - article [ref=f1e123]:
+            - generic [aria-hidden] [ref=f1e124]: ✓
+            - heading "Add an emergency contact" [level=3] [ref=f1e125]
+            - paragraph [ref=f1e126]: Save an emergency contact in the app so you can quickly get help if you need it during or after a trip.
+      - generic [ref=f1e129]:
+        - heading "Ready to go? Get the MIGO app." [level=2] [ref=f1e130]: Ready to go?Get the MIGO app.
+        - paragraph [ref=f1e131]: Available now on the Google Play Store.
+        - generic [ref=f1e132]:
+          - link "Download the MIGO app on the App Store" [ref=f1e133] [cursor=pointer]:
+            - /url: "#download"
+            - img "Download on the App Store" [ref=f1e134]
+          - link "Get the MIGO app on Google Play" [ref=f1e135] [cursor=pointer]:
+            - /url: "#download"
+            - generic [ref=f1e136]:
+              - generic [ref=f1e137]: GET IT ON
+              - generic [ref=f1e138]: Google Play
+      - generic [ref=f1e139]:
+        - generic [ref=f1e140]:
+          - generic [ref=f1e141]: FOR DRIVERS
+          - heading "Drive with MIGO" [level=2] [ref=f1e142]
+          - paragraph [ref=f1e143]: Sign up, get approved, and start with a 7-day free trial. Passengers pay you directly for every ride.
+        - generic [ref=f1e144]:
+          - paragraph [ref=f1e145]: 7-day free trial for approved drivers
+          - paragraph [ref=f1e148]: Passengers pay you directly
+          - paragraph [ref=f1e151]: Simple subscription, renewed in the app
+          - paragraph [ref=f1e154]: Get requests from riders nearby
+    - contentinfo [ref=f1e157]:
+      - generic [ref=f1e158]:
+        - generic [ref=f1e159]:
+          - link "Migo Rides home" [ref=f1e160] [cursor=pointer]:
+            - /url: /
+          - paragraph [ref=f1e162]: Get moving with MIGO.
+        - generic [ref=f1e163]:
+          - generic [ref=f1e164]:
+            - strong [ref=f1e165]: Company
+            - link "About us" [ref=f1e166] [cursor=pointer]:
+              - /url: "#help"
+            - link "Careers" [ref=f1e167] [cursor=pointer]:
+              - /url: "#drivers"
+            - link "Blog" [ref=f1e168] [cursor=pointer]:
+              - /url: "#help"
+          - generic [ref=f1e169]:
+            - strong [ref=f1e170]: Product
+            - link "Ride" [ref=f1e171] [cursor=pointer]:
+              - /url: "#ride"
+            - link "Drive" [ref=f1e172] [cursor=pointer]:
+              - /url: "#drivers"
+            - link "Safety" [ref=f1e173] [cursor=pointer]:
+              - /url: "#safety"
+          - generic [ref=f1e174]:
+            - strong [ref=f1e175]: Support
+            - link "Help center" [ref=f1e176] [cursor=pointer]:
+              - /url: mailto:hello@migoweb.com
+            - link "Contact us" [ref=f1e177] [cursor=pointer]:
+              - /url: mailto:hello@migoweb.com
+            - link "Terms" [ref=f1e178] [cursor=pointer]:
+              - /url: "#help"
+        - generic [ref=f1e179]:
+          - generic [ref=f1e180]: © 2026 Migo Technologies Limited. All rights reserved.
+          - generic [ref=f1e181]:
+            - link "Privacy policy" [ref=f1e182] [cursor=pointer]:
+              - /url: /privacy
+            - text: ·
+            - link "Terms" [ref=f1e183] [cursor=pointer]:
+              - /url: "#help"
