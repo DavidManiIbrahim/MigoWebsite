@@ -49,7 +49,6 @@ onMounted(async () => {
           duration: 0.75,
           ease: "power2.out",
           scrollTrigger: {
-            scroller: root,
             trigger: section,
             start: "top 84%",
             once: true,
