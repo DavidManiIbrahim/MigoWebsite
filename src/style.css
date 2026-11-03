@@ -3687,3 +3687,108 @@ h3 {
 .consent-banner button:hover {
   opacity: 0.85;
 }
+
+.migo-live {
+  --migo-live-header-height: 62px;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scroll-padding-block-start: var(--migo-live-header-height);
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.migo-live::-webkit-scrollbar {
+  display: none;
+}
+.migo-live-header {
+  position: sticky;
+  top: 0;
+}
+.migo-live > main > section,
+.migo-live > .migo-site-footer {
+  min-height: calc(100svh - var(--migo-live-header-height));
+  min-height: calc(100dvh - var(--migo-live-header-height));
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+@media (max-width: 600px) {
+  .migo-live {
+    --migo-live-header-height: 58px;
+  }
+}
+
+.migo-home-copy {
+  text-align: center;
+}
+.migo-home-copy h1 {
+  font-size: 58px;
+}
+.migo-home-copy > p {
+  max-width: 440px;
+  margin-inline: auto;
+  font-size: 16px;
+}
+.migo-home-copy .play-card {
+  margin-inline: auto;
+  text-align: left;
+}
+.migo-live .play-card > strong {
+  font-size: 16px;
+}
+.migo-why h2,
+.migo-section-intro h2,
+.migo-faq h2 {
+  font-size: 34px;
+}
+.migo-why-intro,
+.migo-section-intro p,
+.migo-faq-intro {
+  font-size: 16px;
+}
+.benefit-card h3,
+.migo-step-grid h3,
+.migo-safety-grid h3 {
+  font-size: 20px;
+}
+.benefit-card p,
+.migo-step-grid p,
+.migo-faq-grid p,
+.migo-safety-grid p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.migo-faq-grid h3 {
+  font-size: 17px;
+}
+.driver-intro h2 {
+  font-size: 38px;
+}
+.driver-intro p,
+.driver-benefits p {
+  font-size: 16px;
+}
+@media (max-width: 600px) {
+  .migo-home-copy h1 { font-size: 48px; }
+  .migo-home-copy > p { font-size: 14px; }
+  .migo-why h2,
+  .migo-section-intro h2,
+  .migo-faq h2 { font-size: 29px; }
+  .migo-why-intro,
+  .migo-section-intro p,
+  .migo-faq-intro { font-size: 14px; }
+  .benefit-card h3,
+  .migo-step-grid h3,
+  .migo-safety-grid h3 { font-size: 18px; }
+  .benefit-card p,
+  .migo-step-grid p,
+  .migo-faq-grid p,
+  .migo-safety-grid p { font-size: 13px; }
+  .migo-faq-grid h3 { font-size: 16px; }
+  .driver-intro h2 { font-size: 33px; }
+  .driver-intro p,
+  .driver-benefits p { font-size: 14px; }
+}
