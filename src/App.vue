@@ -1,12 +1,11 @@
 <script setup>
-import { computed, defineAsyncComponent, onMounted, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import { useHead, useSeoMeta } from "@unhead/vue";
 import { ConvexClient } from "convex/browser";
-import { Moon, Sun } from "@lucide/vue";
 import { api } from "../convex/_generated/api.js";
 import migoMark from "./assets/migo-mark.webp";
 import migoWordmark from "./assets/migo-wordmark.png";
-import migoWordmarkDark from "./assets/migo-wordmark-white.png";
+import migoWordmarkDark from "./assets/migo-wordmark-dark.png";
 import LivePage from "./components/LivePage.vue";
 import AdminPage from "./components/AdminPage.vue";
 import ConsentBanner from "./components/ConsentBanner.vue";
@@ -18,7 +17,6 @@ import {
 } from "./analytics";
 
 const defaultPage = "waitlist";
-const PrivacyPage = defineAsyncComponent(() => import("./components/PrivacyPage.vue"));
 const rideType = ref("Rider");
 const submitted = ref(false);
 const isDark = ref(false);
@@ -28,21 +26,17 @@ const analyticsConsent = ref(getAnalyticsConsent());
 
 const defaultSiteUrl = "https://migotech.org";
 const siteUrl = (import.meta.env.VITE_SITE_URL || (typeof window !== "undefined" && window.location.origin && !window.location.origin.includes("localhost") ? window.location.origin : defaultSiteUrl)).replace(/\/$/, "");
-const pageUrl = computed(() => `${siteUrl}${currentPage.value === "live" ? "/live" : currentPage.value === "admin" ? "/admin" : currentPage.value === "privacy" ? "/privacy" : "/"}`);
+const pageUrl = computed(() => `${siteUrl}${currentPage.value === "live" ? "/live" : currentPage.value === "admin" ? "/admin" : "/"}`);
 const pageTitle = computed(() => currentPage.value === "live"
   ? "MIGO Rides | On-Demand Rideshare, Upfront Pricing & Verified Drivers"
   : currentPage.value === "admin"
     ? "MIGO Admin | Beta Signups"
-    : currentPage.value === "privacy"
-      ? "MIGO Privacy Policy"
-      : "MIGO Rides | Smart On-Demand Rideshare - Join the Launch Waitlist");
+    : "MIGO Rides | Smart On-Demand Rideshare - Join the Launch Waitlist");
 const pageDescription = computed(() => currentPage.value === "live"
   ? "Get moving with MIGO. Request rides with upfront fare transparency, vetted drivers, and live GPS tracking. Drivers keep 100% of earnings on a simple subscription."
   : currentPage.value === "admin"
     ? "Private MIGO beta signup administration."
-    : currentPage.value === "privacy"
-      ? "Learn how MIGO collects, uses, stores, protects, and shares personal information when you use our services."
-      : "MIGO is almost here. Join the waitlist for early access to upfront fare estimates, verified drivers, live trip tracking, and direct driver earnings.");
+    : "MIGO is almost here. Join the waitlist for early access to upfront fare estimates, verified drivers, live trip tracking, and direct driver earnings.");
 
 useSeoMeta({
   title: pageTitle,
@@ -78,7 +72,6 @@ function resolvePage(pathname) {
   const path = pathname.replace(/\/+$/, "") || "/";
   if (path === "/live") return "live";
   if (path === "/admin") return "admin";
-  if (path === "/privacy") return "privacy";
   if (path === "/waitlist") return "waitlist";
   return defaultPage;
 }
@@ -200,14 +193,6 @@ async function joinWaitlist() {
     :is-dark="isDark"
     @toggle-theme="toggleTheme"
     @open-waitlist="openWaitlist"
-    @open-privacy="navigateTo('/privacy')"
-  />
-
-  <PrivacyPage
-    v-else-if="currentPage === 'privacy'"
-    :is-dark="isDark"
-    @toggle-theme="toggleTheme"
-    @open-live="navigateTo('/live')"
   />
 
   <template v-else>
@@ -225,8 +210,7 @@ async function joinWaitlist() {
         :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
         @click="toggleTheme"
       >
-        <Sun v-if="isDark" :size="18" stroke-width="2" aria-hidden="true" />
-        <Moon v-else :size="18" stroke-width="2" aria-hidden="true" />
+        <span aria-hidden="true">{{ isDark ? "☀" : "☾" }}</span>
         <span>{{ isDark ? "Light mode" : "Dark mode" }}</span>
       </button>
     </header>

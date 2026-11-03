@@ -1,69 +1,18 @@
 <script setup>
-import { nextTick, onMounted, onUnmounted } from "vue";
 import migoMark from "../assets/migo-mark.webp";
 import migoWordmark from "../assets/migo-wordmark.png";
 import phone from "/migophone-nobg.png";
-import migoWordmarkDark from "../assets/migo-wordmark-white.png";
+import migoWordmarkDark from "../assets/migo-wordmark-dark.png";
 import googlePlayLogo from "../assets/Google Play Logo.png";
 import routeIllustration from "../assets/Illustration · Phone route.png";
 import safetyIllustration from "../assets/Illustration · Safety shield.png";
-import { Check, Moon, ReceiptText, ShieldCheck, Sun, UserRoundCheck } from "@lucide/vue";
+import { Check, ReceiptText, UserRoundCheck, ShieldCheck } from "@lucide/vue";
 
 defineProps({
   isDark: Boolean,
 });
 
-const emit = defineEmits(["toggle-theme", "open-waitlist", "open-privacy"]);
-
-let scrollContext;
-
-onMounted(async () => {
-  if (
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-    document.visibilityState !== "visible"
-  ) {
-    return;
-  }
-
-  await nextTick();
-  const root = document.querySelector(".migo-live");
-  if (!root) return;
-
-  const [{ gsap }, { ScrollTrigger }] = await Promise.all([
-    import("gsap"),
-    import("gsap/ScrollTrigger"),
-  ]);
-  gsap.registerPlugin(ScrollTrigger);
-
-  scrollContext = gsap.context(() => {
-    root.querySelectorAll(
-      ".migo-why-inner, .migo-process-inner, .migo-faq-inner, .migo-safety-inner, .migo-app-cta-inner, .migo-driver-panel",
-    ).forEach((section) => {
-      gsap.fromTo(
-        section,
-        { autoAlpha: 0, y: 28 },
-        {
-          immediateRender: false,
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.75,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 84%",
-            once: true,
-          },
-        },
-      );
-    });
-  }, root);
-
-  ScrollTrigger.refresh();
-});
-
-onUnmounted(() => {
-  scrollContext?.revert();
-});
+const emit = defineEmits(["toggle-theme", "open-waitlist"]);
 </script>
 
 <template>
@@ -73,7 +22,6 @@ onUnmounted(() => {
         <span class="migo-logo-lockup" aria-hidden="true">
           <img class="migo-logo-mark" :src="migoMark" alt="" />
           <img class="migo-logo-wordmark" :src="isDark ? migoWordmarkDark : migoWordmark" alt="" />
-          <!-- <img class="migo-logo-wordmark" :src="islight ? migoWordmarkDark : migoWordmark" alt="" /> -->
         </span>
       </a>
       <nav class="migo-live-nav" aria-label="Main navigation">
@@ -89,8 +37,7 @@ onUnmounted(() => {
           :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="emit('toggle-theme')"
         >
-          <Sun v-if="isDark" :size="18" stroke-width="2" aria-hidden="true" />
-          <Moon v-else :size="18" stroke-width="2" aria-hidden="true" />
+          <span aria-hidden="true">{{ isDark ? "☀" : "☾" }}</span>
           <!-- <span class="theme-toggle-label">{{ isDark ? "" : "" }}</span> -->
         </button>
         <a class="migo-download-button" href="#download">Download app</a>
@@ -281,10 +228,7 @@ onUnmounted(() => {
           <div><strong>Product</strong><a href="#ride">Ride</a><a href="#drivers">Drive</a><a href="#safety">Safety</a></div>
           <div><strong>Support</strong><a href="mailto:hello@migoweb.com">Help center</a><a href="mailto:hello@migoweb.com">Contact us</a><a href="#help">Terms</a></div>
         </div>
-        <div class="footer-legal">
-          <span>© 2026 Migo Technologies Limited. All rights reserved.</span>
-          <span><a href="/privacy" @click.prevent="emit('open-privacy')">Privacy policy</a> · <a href="#help">Terms</a></span>
-        </div>
+        <div class="footer-legal"><span>© 2026 Migo Technologies Limited. All rights reserved.</span><span>Privacy · Terms</span></div>
       </div>
     </footer>
   </div>
