@@ -31,7 +31,7 @@ const emit = defineEmits(["toggle-theme", "open-live"]);
 
     <main class="privacy-document">
       <p class="privacy-eyebrow">LEGAL · LAST UPDATED 28 OCTOBER 2026</p>
-      <h1>MIGO Privacy Policy</h1>
+      <h1><img class="migo-heading-wordmark" :src="isDark ? migoWordmarkDark : migoWordmark" alt="MIGO" /> Privacy Policy</h1>
       <p class="privacy-dates"><strong>Effective date:</strong> 28 October 2026<br /><strong>Last updated:</strong> 28 October 2026</p>
 
       <section>

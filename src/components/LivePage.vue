@@ -6,6 +6,7 @@ import phone from "/migophone-nobg.png";
 import migoWordmarkDark from "../assets/migo-wordmark-white.png";
 import googlePlayLogo from "../assets/Google Play Logo.png";
 import safetyIllustration from "../assets/Illustration · Safety shield.png";
+import footerCar from "../assets/migo-car-nobg.png";
 import { BadgeCheck, Check, Moon, PhoneCall, ReceiptText, Share2, ShieldCheck, Sun, UserRoundCheck } from "@lucide/vue";
 
 defineProps({
@@ -15,18 +16,62 @@ defineProps({
 const emit = defineEmits(["toggle-theme", "open-waitlist", "open-privacy", "open-contact"]);
 
 let scrollContext;
+let stopArrowNav;
+
+function initArrowNav(root) {
+  let lockedUntil = 0;
+
+  function onKeydown(event) {
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+    if (event.key !== "ArrowDown" && event.key !== "ArrowRight"
+      && event.key !== "ArrowUp" && event.key !== "ArrowLeft") return;
+
+    const target = event.target;
+    const tag = target instanceof HTMLElement ? target.tagName : "";
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test(tag)) return;
+    if (target instanceof HTMLElement && target.isContentEditable) return;
+
+    const sections = [
+      ...root.querySelectorAll("main > section"),
+      root.querySelector(".migo-site-footer"),
+    ].filter(Boolean);
+    if (!sections.length) return;
+
+    event.preventDefault();
+
+    const now = performance.now();
+    if (now < lockedUntil) return;
+
+    const base = root.getBoundingClientRect().top;
+    let index = 0;
+    sections.forEach((section, i) => {
+      if (section.getBoundingClientRect().top - base <= 2) index = i;
+    });
+
+    const forward = event.key === "ArrowDown" || event.key === "ArrowRight";
+    const nextIndex = Math.min(Math.max(index + (forward ? 1 : -1), 0), sections.length - 1);
+
+    lockedUntil = now + 700;
+    sections[nextIndex].scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  window.addEventListener("keydown", onKeydown);
+  return () => window.removeEventListener("keydown", onKeydown);
+}
 
 onMounted(async () => {
+  await nextTick();
+  const root = document.querySelector(".migo-live");
+  if (!root) return;
+
+  stopArrowNav = initArrowNav(root);
+
   if (
     window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
     document.visibilityState !== "visible"
   ) {
     return;
   }
-
-  await nextTick();
-  const root = document.querySelector(".migo-live");
-  if (!root) return;
 
   const [{ gsap }, { ScrollTrigger }] = await Promise.all([
     import("gsap"),
@@ -56,6 +101,27 @@ onMounted(async () => {
         },
       );
     });
+
+    const track = root.querySelector(".migo-footer-car-track");
+    const car = root.querySelector(".migo-footer-car");
+    if (track && car) {
+      gsap.fromTo(
+        car,
+        { x: () => -car.offsetWidth - 32 },
+        {
+          x: () => track.clientWidth - car.offsetWidth,
+          duration: 2.6,
+          ease: "power2.inOut",
+          invalidateOnRefresh: true,
+          scrollTrigger: {
+            scroller: root,
+            trigger: ".migo-site-footer",
+            start: "top 70%",
+            once: true,
+          },
+        },
+      );
+    }
   }, root);
 
   ScrollTrigger.refresh();
@@ -63,6 +129,7 @@ onMounted(async () => {
 
 onUnmounted(() => {
   scrollContext?.revert();
+  stopArrowNav?.();
 });
 </script>
 
@@ -130,7 +197,7 @@ onUnmounted(() => {
 
       <section id="why-migo" class="migo-why">
         <div class="migo-why-inner section-wrap">
-          <h2>Why MIGO</h2>
+          <h2>Why <img class="migo-heading-wordmark" :src="migoWordmark" alt="MIGO" /></h2>
           <p class="migo-why-intro">Clear pricing, driver details, and live tracking make every ride easier to request, follow, and finish.</p>
           <div class="migo-benefit-grid">
             <article class="benefit-card benefit-card-yellow">
@@ -245,7 +312,7 @@ onUnmounted(() => {
       <section id="download" class="migo-app-cta">
         <div class="migo-app-cta-inner section-wrap">
           <div>
-            <h2>Ready to go?<br /><span>Get the MIGO app.</span></h2>
+            <h2>Ready to go?<br /><span>Get the <img class="migo-heading-wordmark migo-heading-wordmark-tight" :src="migoWordmarkDark" alt="MIGO" /> app.</span></h2>
             <p>Available now on the Google Play Store.</p>
             <div class="store-badges">
 
@@ -266,7 +333,7 @@ onUnmounted(() => {
       <section id="drivers" class="migo-driver-panel section-wrap">
         <div class="driver-intro">
           <span class="driver-tag">FOR DRIVERS</span>
-          <h2>Drive with MIGO</h2>
+          <h2>Drive with <img class="migo-heading-wordmark" :src="isDark ? migoWordmarkDark : migoWordmark" alt="MIGO" /></h2>
           <p>Sign up, get approved, and start with a 7-day free trial. Passengers pay you directly for every ride.</p>
         </div>
         <div class="driver-benefits">
@@ -299,8 +366,10 @@ onUnmounted(() => {
             <strong>Get in touch</strong>
             <a href="mailto:migotechnologiesltd01@gmail.com">Email us</a>
             <a href="/contact" @click.prevent="emit('open-contact')">Contact page</a>
-            <a href="/privacy" @click.prevent="emit('open-privacy')">Privacy policy</a>
           </div>
+        </div>
+        <div class="migo-footer-car-track" aria-hidden="true">
+          <img class="migo-footer-car" :src="footerCar" alt="" />
         </div>
         <div class="footer-legal">
           <span>© 2026 Migo Technologies Limited. All rights reserved.</span>
