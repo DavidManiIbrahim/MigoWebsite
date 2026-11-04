@@ -4,8 +4,6 @@ import migoMark from "../assets/migo-mark.webp";
 import migoWordmark from "../assets/migo-wordmark.png";
 import phone from "/migophone-nobg.png";
 import migoWordmarkDark from "../assets/migo-wordmark-white.png";
-import heroWordmarkLight from "../assets/migo-wordmark-gold.png";
-import heroWordmarkDark from "../assets/migo-wordmark-gold-bright.png";
 import googlePlayLogo from "../assets/Google Play Logo.png";
 import safetyIllustration from "../assets/Illustration · Safety shield.png";
 import { BadgeCheck, Check, Moon, PhoneCall, ReceiptText, Share2, ShieldCheck, Sun, UserRoundCheck } from "@lucide/vue";
@@ -107,7 +105,7 @@ onUnmounted(() => {
               Get moving<br />with
               <img
                 class="migo-hero-wordmark"
-                :src="isDark ? heroWordmarkDark : heroWordmarkLight"
+                :src="isDark ? migoWordmarkDark : migoWordmark"
                 alt="MIGO"
               />
             </h1>
