@@ -1,6 +1,6 @@
 # MIGO Rides
 
-> MIGO is an on-demand rideshare platform built for transparent, safe, and reliable city transportation. Riders get upfront fares, verified driver credentials, and live trip tracking. Drivers enjoy direct passenger payments, zero surprise commissions, and a 7-day free trial on an affordable subscription model.
+> MIGO is an on-demand ride-hailing platform built for transparent, safe, and reliable city transportation. Riders get upfront fares, verified driver credentials, and live trip tracking. Drivers enjoy direct passenger payments, zero surprise commissions, and a 7-day free trial on an affordable subscription model.
 
 ## Core Links & Pages
 - [Official Website & Waitlist](https://migotech.org/): Join early waitlist for riders and drivers.

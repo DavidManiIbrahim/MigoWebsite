@@ -505,6 +505,8 @@ code {
   --text-h: #f5f4ec;
   --muted: #a4a69c;
   --paper: #151713;
+  --bg: #1b1d18;
+  --border: #343630;
 }
 
 * {
@@ -2426,12 +2428,16 @@ h3 {
   color: #777;
   font-size: 9px;
 }
+.footer-address {
+  color: #4b4c44;
+  font-weight: 700;
+}
 :root[data-theme="dark"] .footer-brand-block > p {
   color: #b0b1a7;
 }
 .footer-links {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
 }
 .footer-links > div {
@@ -2556,6 +2562,8 @@ h3 {
   gap: 8px;
 }
 .splash-logo-lockup {
+  flex-direction: column;
+  gap: 10px;
   height: auto;
   margin-bottom: 12px;
 }
@@ -2592,9 +2600,9 @@ h3 {
   background: var(--live-paper);
 }
 :root[data-theme="dark"] .migo-live {
-  --live-paper: #f5f4ec;
-  color: #0c0c0c;
-  background: #fff;
+  --live-paper: #1b1d18;
+  color: #f5f4ec;
+  background: #1b1d18;
 }
 .migo-live-header {
   position: relative;
@@ -2677,16 +2685,20 @@ h3 {
   padding: 12px 14px 9px;
   /* border: 1px solid #efeee9; */
   border-radius: 12px;
-  background: #fff;
-  color: #111;
+  background: transparent;
+  color: var(--play-card-ink, #111);
 }
 .play-card > strong {
-  color: #111;
+  color: var(--play-card-ink, #111);
   font-size: 12px;
 }
 .play-card .play-caption {
-  color: #666;
+  color: var(--play-card-muted, #666);
   font-size: 8px;
+}
+:root[data-theme="dark"] .play-card {
+  --play-card-ink: #f5f4ec;
+  --play-card-muted: #c1c2b9;
 }
 .migo-ride-image {
   width: min(100%, 410px);
@@ -2748,7 +2760,15 @@ h3 {
   line-height: 1.6;
 }
 .migo-why-intro {
-  max-width: 300px;
+  max-width: 400px;
+}
+/* Centered section header — the benefit grid below stays left-aligned. */
+.migo-why-inner > h2,
+.migo-why-inner > .migo-why-intro {
+  text-align: center;
+}
+.migo-why-inner > .migo-why-intro {
+  margin-inline: auto;
 }
 .migo-benefit-grid {
   gap: 13px;
@@ -2797,6 +2817,23 @@ h3 {
   height: 82px;
   flex: none;
   object-fit: contain;
+}
+/* How it works / User safety — icon above a centred header, matching Why MIGO. */
+.migo-section-intro {
+  flex-direction: column-reverse;
+  gap: 14px;
+  text-align: center;
+}
+.migo-section-intro p {
+  margin-inline: auto;
+}
+/* FAQ header */
+.migo-faq-inner > h2,
+.migo-faq-inner > .migo-faq-intro {
+  text-align: center;
+}
+.migo-faq-inner > .migo-faq-intro {
+  margin-inline: auto;
 }
 .migo-step-grid {
   display: grid;
@@ -2858,17 +2895,71 @@ h3 {
 }
 .migo-faq-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: 1fr;
+  align-items: start;
   gap: 12px;
   margin-top: 20px;
 }
 .migo-faq-grid article {
   min-width: 0;
-  min-height: 136px;
   padding: 16px;
   border-radius: 16px;
   background: #fffefa;
   box-shadow: 0 5px 12px rgb(93 72 0 / 10%);
+}
+.migo-faq-grid details {
+  height: 100%;
+}
+.migo-faq-grid summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  list-style: none;
+}
+.migo-faq-grid summary::-webkit-details-marker {
+  display: none;
+}
+.migo-faq-grid summary h3 {
+  margin: 0;
+}
+/* Toggle chip — "+" gives way to "-" while the answer is open. */
+.migo-faq-grid summary::after {
+  content: "+";
+  width: 22px;
+  height: 22px;
+  display: grid;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  background: #111;
+  color: #ffd400;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+}
+.migo-faq-grid details[open] summary::after {
+  content: "−";
+}
+.migo-faq-grid details > p {
+  margin: 10px 0 0;
+  animation: faq-reveal 240ms ease-out both;
+}
+.migo-faq-grid summary:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+}
+@keyframes faq-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .migo-faq-grid details > p {
+    animation: none;
+  }
 }
 .migo-faq-grid h3 {
   margin: 0 0 6px;
@@ -2890,6 +2981,66 @@ h3 {
   min-height: 150px;
   border: 1px solid #e9e8e4;
   background: #fff;
+}
+
+/* Card-grid hover — shared by every section that renders cards
+   (Why MIGO, How it works, Safety, FAQ). */
+.migo-why .benefit-card,
+.migo-process .migo-step-grid article,
+.migo-safety .migo-safety-grid article,
+.migo-faq .migo-faq-grid article {
+  --card-hover-lift: -8px;
+  --card-hover-shadow: 0 24px 42px -20px rgb(0 0 0 / 32%), 0 0 0 1px rgb(0 0 0 / 8%);
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 320ms ease;
+}
+/* Cards sitting on the near-black Why section need a light hairline so the
+   edge stays visible after the lift. */
+.migo-why .benefit-card {
+  --card-hover-shadow: 0 24px 42px -18px rgb(0 0 0 / 90%), 0 0 0 1px rgb(255 255 255 / 14%);
+}
+.migo-why .benefit-card:hover,
+.migo-why .benefit-card:focus-within,
+.migo-process .migo-step-grid article:hover,
+.migo-safety .migo-safety-grid article:hover,
+.migo-faq .migo-faq-grid article:hover {
+  transform: translateY(var(--card-hover-lift));
+  box-shadow: var(--card-hover-shadow);
+}
+/* The icon/number badge pops in sync with the card. */
+.migo-why .benefit-card > a,
+.migo-process .migo-step-grid article > span,
+.migo-safety .migo-safety-grid article > span {
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.migo-why .benefit-card:hover > a,
+.migo-why .benefit-card:focus-within > a,
+.migo-process .migo-step-grid article:hover > span,
+.migo-safety .migo-safety-grid article:hover > span {
+  transform: scale(1.12) rotate(-8deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .migo-why .benefit-card,
+  .migo-process .migo-step-grid article,
+  .migo-safety .migo-safety-grid article,
+  .migo-faq .migo-faq-grid article,
+  .migo-why .benefit-card > a,
+  .migo-process .migo-step-grid article > span,
+  .migo-safety .migo-safety-grid article > span {
+    transition: none;
+  }
+  .migo-why .benefit-card:hover,
+  .migo-why .benefit-card:focus-within,
+  .migo-process .migo-step-grid article:hover,
+  .migo-safety .migo-safety-grid article:hover,
+  .migo-faq .migo-faq-grid article:hover,
+  .migo-why .benefit-card:hover > a,
+  .migo-why .benefit-card:focus-within > a,
+  .migo-process .migo-step-grid article:hover > span,
+  .migo-safety .migo-safety-grid article:hover > span {
+    transform: none;
+  }
 }
 
 .migo-app-cta {
@@ -3053,7 +3204,7 @@ h3 {
 /* "Get the MIGO app" section visual — app image (public/migoapps.jpg, 1024x1024).
    The JPG has a black background, so `screen` blending drops it against the dark card. */
 .migo-app-cta-inner {
-  min-height: 320px;
+  min-height: 397px;
 }
 .migo-app-media {
   position: absolute;
@@ -3084,9 +3235,10 @@ h3 {
 }
 .migo-driver-panel {
   width: 100%;
-  min-height: clamp(320px, 42vh, 380px);
+  min-height: 397px;
   margin: 0 auto;
   padding-block: 56px;
+  padding-inline: max(34px, calc((100% - 1080px) / 2));
   /* border: 1px solid #e8e7e3; */
   /* border-radius: 20px; */
   box-shadow: 0 7px 20px rgb(0 0 0 / 8%);
@@ -3100,13 +3252,14 @@ h3 {
   color: #f5f1f1;
 }
 .migo-site-footer-inner {
-  width: min(1080px, calc(100% - 64px));
+  width: 100%;
   min-height: 166px;
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
   align-items: start;
-  column-gap: 60px;
+  column-gap: clamp(28px, 6vw, 90px);
   padding-block: 23px 16px;
+  padding-inline: clamp(20px, 5vw, 64px);
 }
 .footer-brand-block .migo-logo-lockup {
   height: auto;
@@ -3142,12 +3295,19 @@ h3 {
   .migo-process-inner,
   .migo-faq-inner,
   .migo-safety-inner,
-  .migo-app-cta-inner,
-  .migo-site-footer-inner {
+  .migo-app-cta-inner {
     width: min(100% - 44px, 700px);
   }
-  .migo-faq-grid {
+  .migo-site-footer-inner {
+    width: 100%;
+    padding-inline: 22px;
+  }
+  .footer-links {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 20px;
+  }
+  .migo-faq-grid {
+    grid-template-columns: 1fr;
   }
   .migo-driver-panel {
     width: min(100% - 44px, 700px);
@@ -3200,9 +3360,12 @@ h3 {
   .migo-faq-inner,
   .migo-safety-inner,
   .migo-app-cta-inner,
-  .migo-site-footer-inner,
   .migo-driver-panel {
     width: calc(100% - 40px);
+  }
+  .migo-site-footer-inner {
+    width: 100%;
+    padding-inline: 20px;
   }
   .migo-why {
     padding-block: 34px;
@@ -3262,6 +3425,13 @@ h3 {
 
 .migo-home-copy h1 {
   font-size: 50px;
+}
+.migo-home-copy h1 .migo-hero-wordmark {
+  display: inline-block;
+  width: auto;
+  height: 0.88em;
+  margin-left: 0.06em;
+  vertical-align: -0.08em;
 }
 .migo-home-copy > p {
   font-size: 14px;
@@ -3791,4 +3961,42 @@ h3 {
   .driver-intro h2 { font-size: 33px; }
   .driver-intro p,
   .driver-benefits p { font-size: 14px; }
+}
+
+/* ── Dark mode — LivePage surfaces ─────────────────────────────────────────
+   The white section/card surfaces are replaced by the same grays the header
+   and driver panel already use, so dark mode stops flashing white panels. */
+:root[data-theme="dark"] .migo-process,
+:root[data-theme="dark"] .migo-safety {
+  background: #1b1d18;
+}
+:root[data-theme="dark"] .migo-section-intro h2 {
+  color: #f5f4ec;
+}
+:root[data-theme="dark"] .migo-section-intro p {
+  color: #b0b1a7;
+}
+:root[data-theme="dark"] .migo-step-grid article,
+:root[data-theme="dark"] .migo-safety-grid article,
+:root[data-theme="dark"] .migo-faq-grid article {
+  border-color: #343630;
+  background: #242720;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 38%);
+}
+:root[data-theme="dark"] .migo-step-grid h3,
+:root[data-theme="dark"] .migo-safety-grid h3,
+:root[data-theme="dark"] .migo-faq-grid h3 {
+  color: #f5f4ec;
+}
+:root[data-theme="dark"] .migo-step-grid p,
+:root[data-theme="dark"] .migo-safety-grid p,
+:root[data-theme="dark"] .migo-faq-grid p {
+  color: #c3c5bb;
+}
+:root[data-theme="dark"] .migo-faq-grid summary::after {
+  background: #ffd400;
+  color: #111;
+}
+:root[data-theme="dark"] .migo-faq-grid summary:focus-visible {
+  outline-color: #f5f4ec;
 }

@@ -4,16 +4,17 @@ import migoMark from "../assets/migo-mark.webp";
 import migoWordmark from "../assets/migo-wordmark.png";
 import phone from "/migophone-nobg.png";
 import migoWordmarkDark from "../assets/migo-wordmark-white.png";
+import heroWordmarkLight from "../assets/migo-wordmark-gold.png";
+import heroWordmarkDark from "../assets/migo-wordmark-gold-bright.png";
 import googlePlayLogo from "../assets/Google Play Logo.png";
-import routeIllustration from "../assets/Illustration · Phone route.png";
 import safetyIllustration from "../assets/Illustration · Safety shield.png";
-import { Check, Moon, ReceiptText, ShieldCheck, Sun, UserRoundCheck } from "@lucide/vue";
+import { BadgeCheck, Check, Moon, PhoneCall, ReceiptText, Share2, ShieldCheck, Sun, UserRoundCheck } from "@lucide/vue";
 
 defineProps({
   isDark: Boolean,
 });
 
-const emit = defineEmits(["toggle-theme", "open-waitlist", "open-privacy"]);
+const emit = defineEmits(["toggle-theme", "open-waitlist", "open-privacy", "open-contact"]);
 
 let scrollContext;
 
@@ -102,7 +103,14 @@ onUnmounted(() => {
       <section id="ride" class="migo-home-hero">
         <div class="migo-home-hero-inner">
           <div class="migo-home-copy">
-            <h1>Get moving<br />with MIGO</h1>
+            <h1>
+              Get moving<br />with
+              <img
+                class="migo-hero-wordmark"
+                :src="isDark ? heroWordmarkDark : heroWordmarkLight"
+                alt="MIGO"
+              />
+            </h1>
             <p>Request a ride in a few taps, see your driver and fare upfront, and track every trip.</p>
             <div class="play-card">
               <strong>Get the app</strong>
@@ -153,7 +161,6 @@ onUnmounted(() => {
               <h2>How it works</h2>
               <p>Request a ride, confirm your fare and driver, then pay securely in the app after the trip.</p>
             </div>
-            <img :src="routeIllustration" alt="A route traced between two places on a phone" />
           </div>
           <div class="migo-step-grid">
             <article>
@@ -177,24 +184,32 @@ onUnmounted(() => {
 
       <section id="faq" class="migo-faq">
         <div class="migo-faq-inner section-wrap">
-          <h2>FAQ</h2>
+          <h2>Frequently asked questions</h2>
           <p class="migo-faq-intro">Common questions about requesting a ride, payment and getting help.</p>
           <div class="migo-faq-grid">
             <article>
-              <h3>How do I request a ride?</h3>
-              <p>Open the app, search your destination, confirm your pickup location, and request a ride. You’ll see a fare estimate before you confirm.</p>
+              <details>
+                <summary><h3>How do I request a ride?</h3></summary>
+                <p>Open the app, search your destination, confirm your pickup location, and request a ride. You’ll see a fare estimate before you confirm.</p>
+              </details>
             </article>
             <article>
-              <h3>How do I pay for my ride?</h3>
-              <p>Pay in the app after your ride using our secure payment gateway. Drivers cannot accept cash, so show your receipt if asked.</p>
+              <details>
+                <summary><h3>How do I pay for my ride?</h3></summary>
+                <p>Pay in the app after your ride using our secure payment gateway. Drivers cannot accept cash, so show your receipt if asked.</p>
+              </details>
             </article>
             <article>
-              <h3>Where can I see my fare estimate?</h3>
-              <p>You can see a fare estimate before you request a ride, and the final trip details are available after the ride is complete.</p>
+              <details>
+                <summary><h3>Where can I see my fare estimate?</h3></summary>
+                <p>You can see a fare estimate before you request a ride, and the final trip details are available after the ride is complete.</p>
+              </details>
             </article>
             <article>
-              <h3>How do I get trip help?</h3>
-              <p>You can get trip help from inside the app after the ride is complete, or visit the help center for more support.</p>
+              <details>
+                <summary><h3>How do I get trip help?</h3></summary>
+                <p>You can get trip help from inside the app after the ride is complete, or visit the help center for more support.</p>
+              </details>
             </article>
           </div>
         </div>
@@ -211,17 +226,17 @@ onUnmounted(() => {
           </div>
           <div class="migo-safety-grid">
             <article>
-              <span aria-hidden="true">✓</span>
+              <span aria-hidden="true"><BadgeCheck :size="18" stroke-width="2" /></span>
               <h3>Check the plate and driver</h3>
               <p>Before you get in, confirm the driver’s name, vehicle details and plate match what the app shows.</p>
             </article>
             <article>
-              <span aria-hidden="true">✓</span>
+              <span aria-hidden="true"><Share2 :size="18" stroke-width="2" /></span>
               <h3>Share your trip</h3>
               <p>Share trip details with a friend or family member so they can see where you are and where you’re headed.</p>
             </article>
             <article>
-              <span aria-hidden="true">✓</span>
+              <span aria-hidden="true"><PhoneCall :size="18" stroke-width="2" /></span>
               <h3>Add an emergency contact</h3>
               <p>Save an emergency contact in the app so you can quickly get help if you need it during or after a trip.</p>
             </article>
@@ -275,12 +290,19 @@ onUnmounted(() => {
               <img class="migo-logo-wordmark" :src="isDark ? migoWordmarkDark : migoWordmark" alt="" />
             </span>
           </a>
-          <p>Get moving with MIGO.</p>
+          <p>MIGO is an on-demand ride-hailing app built for everyday city trips — upfront fares, verified drivers and live trip tracking, all in one place.</p>
+          <p class="footer-address">Calabar, Cross River State, Nigeria</p>
         </div>
         <div class="footer-links">
           <div><strong>Company</strong><a href="#help">About us</a><a href="#drivers">Careers</a><a href="#help">Blog</a></div>
           <div><strong>Product</strong><a href="#ride">Ride</a><a href="#drivers">Drive</a><a href="#safety">Safety</a></div>
-          <div><strong>Support</strong><a href="mailto:hello@migoweb.com">Help center</a><a href="mailto:hello@migoweb.com">Contact us</a><a href="#help">Terms</a></div>
+          <div><strong>Support</strong><a href="#help">Help center</a><a href="/contact" @click.prevent="emit('open-contact')">Contact us</a><a href="#help">Terms</a></div>
+          <div>
+            <strong>Get in touch</strong>
+            <a href="mailto:migotechnologiesltd01@gmail.com">Email us</a>
+            <a href="/contact" @click.prevent="emit('open-contact')">Contact page</a>
+            <a href="/privacy" @click.prevent="emit('open-privacy')">Privacy policy</a>
+          </div>
         </div>
         <div class="footer-legal">
           <span>© 2026 Migo Technologies Limited. All rights reserved.</span>

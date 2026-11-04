@@ -38,6 +38,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://migotech.org/contact</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://migotech.org/waitlist</loc>
     <lastmod>2026-10-27</lastmod>
     <changefreq>weekly</changefreq>

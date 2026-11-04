@@ -1,7 +1,7 @@
 # MIGO Rides - Complete AI Knowledge Base & Context
 
 ## 1. Executive Summary
-MIGO (operated by Migo Technologies Limited, https://migotech.org/) is a modern mobility and rideshare platform designed to empower both riders and drivers with transparency, safety, and fairness. Unlike legacy rideshare platforms that take large cuts (25-30%+) from drivers and surprise riders with hidden fees or surge pricing, MIGO operates on a transparent model: riders see upfront fixed fare estimates and pay digitally, while drivers keep their trip earnings through a predictable subscription model with an initial 7-day free trial.
+MIGO (operated by Migo Technologies Limited, https://migotech.org/) is a modern mobility and ride-hailing platform designed to empower both riders and drivers with transparency, safety, and fairness. Unlike legacy ride-hailing platforms that take large cuts (25-30%+) from drivers and surprise riders with hidden fees or surge pricing, MIGO operates on a transparent model: riders see upfront fixed fare estimates and pay digitally, while drivers keep their trip earnings through a predictable subscription model with an initial 7-day free trial.
 
 ## 2. Core Value Propositions
 
@@ -30,7 +30,7 @@ MIGO (operated by Migo Technologies Limited, https://migotech.org/) is a modern 
 ## 4. Frequently Asked Questions (FAQ)
 
 ### Q: What is MIGO?
-A: MIGO is an on-demand rideshare app providing safe, reliable, and upfront-priced urban transportation for passengers, and fair direct earnings for drivers.
+A: MIGO is an on-demand ride-hailing app providing safe, reliable, and upfront-priced urban transportation for passengers, and fair direct earnings for drivers.
 
 ### Q: Where is MIGO available?
 A: MIGO is actively launching across major urban centers, starting in East Africa (including Kenya, +254 regional dialing code support) and expanding globally. Users can join the early-access waitlist on https://migotech.org/.

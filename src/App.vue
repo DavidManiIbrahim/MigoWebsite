@@ -19,6 +19,7 @@ import {
 
 const defaultPage = "waitlist";
 const PrivacyPage = defineAsyncComponent(() => import("./components/PrivacyPage.vue"));
+const ContactPage = defineAsyncComponent(() => import("./components/ContactPage.vue"));
 const rideType = ref("Rider");
 const submitted = ref(false);
 const isDark = ref(false);
@@ -28,26 +29,30 @@ const analyticsConsent = ref(getAnalyticsConsent());
 
 const defaultSiteUrl = "https://migotech.org";
 const siteUrl = (import.meta.env.VITE_SITE_URL || (typeof window !== "undefined" && window.location.origin && !window.location.origin.includes("localhost") ? window.location.origin : defaultSiteUrl)).replace(/\/$/, "");
-const pageUrl = computed(() => `${siteUrl}${currentPage.value === "live" ? "/live" : currentPage.value === "admin" ? "/admin" : currentPage.value === "privacy" ? "/privacy" : "/"}`);
+const pageUrl = computed(() => `${siteUrl}${currentPage.value === "live" ? "/live" : currentPage.value === "admin" ? "/admin" : currentPage.value === "privacy" ? "/privacy" : currentPage.value === "contact" ? "/contact" : "/"}`);
 const pageTitle = computed(() => currentPage.value === "live"
-  ? "MIGO Rides | On-Demand Rideshare, Upfront Pricing & Verified Drivers"
+  ? "MIGO Rides | On-Demand Ride-Hailing, Upfront Pricing & Verified Drivers"
   : currentPage.value === "admin"
     ? "MIGO Admin | Beta Signups"
     : currentPage.value === "privacy"
       ? "MIGO Privacy Policy"
-      : "MIGO Rides | Smart On-Demand Rideshare - Join the Launch Waitlist");
+      : currentPage.value === "contact"
+        ? "Contact MIGO | Support, Enquiries & Help"
+        : "MIGO Rides | Smart On-Demand Ride-Hailing - Join the Launch Waitlist");
 const pageDescription = computed(() => currentPage.value === "live"
   ? "Get moving with MIGO. Request rides with upfront fare transparency, vetted drivers, and live GPS tracking. Drivers keep 100% of earnings on a simple subscription."
   : currentPage.value === "admin"
     ? "Private MIGO beta signup administration."
     : currentPage.value === "privacy"
       ? "Learn how MIGO collects, uses, stores, protects, and shares personal information when you use our services."
-      : "MIGO is almost here. Join the waitlist for early access to upfront fare estimates, verified drivers, live trip tracking, and direct driver earnings.");
+      : currentPage.value === "contact"
+        ? "Contact the MIGO team for rider support, driver support, payment questions or privacy requests. We reply within 1–2 business days."
+        : "MIGO is almost here. Join the waitlist for early access to upfront fare estimates, verified drivers, live trip tracking, and direct driver earnings.");
 
 useSeoMeta({
   title: pageTitle,
   description: pageDescription,
-  keywords: "MIGO rides, MIGO, rideshare app, upfront fare taxi, safe cab, driver subscription app, Kenya rideshare, book ride online",
+  keywords: "MIGO rides, MIGO, ride-hailing app, upfront fare taxi, safe cab, driver subscription app, Kenya ride-hailing, book ride online",
   robots: computed(() => currentPage.value === "admin" ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"),
   googlebot: computed(() => currentPage.value === "admin" ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"),
   ogType: "website",
@@ -79,6 +84,7 @@ function resolvePage(pathname) {
   if (path === "/live") return "live";
   if (path === "/admin") return "admin";
   if (path === "/privacy") return "privacy";
+  if (path === "/contact") return "contact";
   if (path === "/waitlist") return "waitlist";
   return defaultPage;
 }
@@ -201,6 +207,7 @@ async function joinWaitlist() {
     @toggle-theme="toggleTheme"
     @open-waitlist="openWaitlist"
     @open-privacy="navigateTo('/privacy')"
+    @open-contact="navigateTo('/contact')"
   />
 
   <PrivacyPage
@@ -208,6 +215,14 @@ async function joinWaitlist() {
     :is-dark="isDark"
     @toggle-theme="toggleTheme"
     @open-live="navigateTo('/live')"
+  />
+
+  <ContactPage
+    v-else-if="currentPage === 'contact'"
+    :is-dark="isDark"
+    @toggle-theme="toggleTheme"
+    @open-live="navigateTo('/live')"
+    @open-privacy="navigateTo('/privacy')"
   />
 
   <template v-else>
