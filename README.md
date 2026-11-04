@@ -17,7 +17,7 @@ Set both variables in the hosting provider's production build environment as wel
 
 ## Analytics
 
-`src/analytics.js` initialises PostHog with Session Replay through `posthog-js`, but only after the visitor allows analytics in the consent banner (`src/components/ConsentBanner.vue`). The decision is stored in `localStorage` under `migo-analytics-consent`; declining keeps the SDK from loading, and clearing that key asks again.
+`src/analytics.js` initialises PostHog with Session Replay through `posthog-js`, but only when `localStorage` holds a granted consent decision (`migo-analytics-consent`). The in-page consent banner has been removed, so analytics stays off for visitors without a stored grant.
 
 Replays mask every input value. Add the `ph-mask` class to mask text and `ph-no-capture` to keep an element out of recordings entirely (the admin page does this). Waitlist journey events (`waitlist_cta_clicked`, `waitlist_submitted`, `waitlist_signup_completed`, `waitlist_signup_failed`) are captured without personal data, and pageviews follow history changes so `/live` and `/waitlist` are tracked.
 

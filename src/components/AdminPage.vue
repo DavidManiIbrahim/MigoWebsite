@@ -155,5 +155,5 @@ h1 { display: flex; align-items: center; gap: 12px; margin: 15px 0 7px; color: #
 .empty-icon { color: #c4aa18; font-size: 26px; }
 .list-limit-note { margin-top: 12px; color: #85877e; font-size: 11px; }
 .dashboard-error { margin-top: 12px; }
-@media (max-width: 640px) { .admin-page { padding: 24px 16px 40px; } .admin-login-card { margin-top: 54px; padding: 29px 23px; } .admin-dashboard { margin-top: 55px; } .dashboard-header { align-items: start; flex-direction: column; } .dashboard-actions { align-self: stretch; } .refresh-button,.signout-button { flex: 1; } .signup-table th,.signup-table td { padding-right: 13px; padding-left: 13px; } }
+@media (max-width: 640px) { .admin-page { padding: 24px 16px 40px; } .admin-login-card { margin-top: 54px; padding: 29px 23px; } .admin-dashboard { margin-top: 55px; } .dashboard-header { align-items: start; flex-direction: column; } .dashboard-actions { align-self: stretch; } .refresh-button,.signout-button { flex: 1; } .signup-table th,.signup-table td { padding-right: 13px; padding-left: 13px; } .admin-form input { font-size: 16px; } }
 </style>

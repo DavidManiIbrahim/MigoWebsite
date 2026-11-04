@@ -17,6 +17,13 @@ const emit = defineEmits(["toggle-theme", "open-waitlist", "open-privacy", "open
 
 let scrollContext;
 let stopArrowNav;
+let footerAccordionQuery;
+
+function syncFooterAccordions(query) {
+  document.querySelectorAll(".migo-live .footer-links details").forEach((item) => {
+    item.open = !query.matches;
+  });
+}
 
 function initArrowNav(root) {
   let lockedUntil = 0;
@@ -63,6 +70,10 @@ onMounted(async () => {
   await nextTick();
   const root = document.querySelector(".migo-live");
   if (!root) return;
+
+  footerAccordionQuery = window.matchMedia("(max-width: 600px)");
+  syncFooterAccordions(footerAccordionQuery);
+  footerAccordionQuery.addEventListener("change", syncFooterAccordions);
 
   stopArrowNav = initArrowNav(root);
 
@@ -130,6 +141,7 @@ onMounted(async () => {
 onUnmounted(() => {
   scrollContext?.revert();
   stopArrowNav?.();
+  footerAccordionQuery?.removeEventListener("change", syncFooterAccordions);
 });
 </script>
 
@@ -197,7 +209,7 @@ onUnmounted(() => {
 
       <section id="why-migo" class="migo-why">
         <div class="migo-why-inner section-wrap">
-          <h2>Why <img class="migo-heading-wordmark" :src="migoWordmark" alt="MIGO" /></h2>
+          <h2>Why <img class="migo-heading-wordmark" :src="isDark ? migoWordmarkDark : migoWordmark" alt="MIGO" /></h2>
           <p class="migo-why-intro">Clear pricing, driver details, and live tracking make every ride easier to request, follow, and finish.</p>
           <div class="migo-benefit-grid">
             <article class="benefit-card benefit-card-yellow">
@@ -224,7 +236,7 @@ onUnmounted(() => {
           <div class="migo-section-intro">
             <div>
               <h2>How it works</h2>
-              <p>Request a ride, confirm your fare and driver, then pay securely in the app after the trip.</p>
+              <p>Request a ride, confirm your fare and driver, then pay your driver directly after the trip.</p>
             </div>
           </div>
           <div class="migo-step-grid">
@@ -240,8 +252,8 @@ onUnmounted(() => {
             </article>
             <article>
               <span>3</span>
-              <h3>Ride and pay in the app</h3>
-              <p>Follow your trip live, then pay in the app after the ride. Drivers never take cash.</p>
+              <h3>Ride and pay your driver</h3>
+              <p>Follow your trip live, then pay your driver directly by transfer or cash after the ride.</p>
             </article>
           </div>
         </div>
@@ -261,7 +273,7 @@ onUnmounted(() => {
             <article>
               <details>
                 <summary><h3>How do I pay for my ride?</h3></summary>
-                <p>Pay in the app after your ride using our secure payment gateway. Drivers cannot accept cash, so show your receipt if asked.</p>
+                <p>Pay your driver directly after your ride — by bank transfer or in cash. Your fare is shown before you confirm, so there are no surprises.</p>
               </details>
             </article>
             <article>
@@ -312,7 +324,7 @@ onUnmounted(() => {
       <section id="download" class="migo-app-cta">
         <div class="migo-app-cta-inner section-wrap">
           <div>
-            <h2>Ready to go?<br /><span>Get the <img class="migo-heading-wordmark migo-heading-wordmark-tight" :src="migoWordmarkDark" alt="MIGO" /> app.</span></h2>
+            <h2>Ready to go?<br /><span>Get the <img class="migo-heading-wordmark migo-heading-wordmark-tight" :src="migoWordmark" alt="MIGO" /> app.</span></h2>
             <p>Available now on the Google Play Store.</p>
             <div class="store-badges">
 
@@ -325,7 +337,7 @@ onUnmounted(() => {
             </div>
           </div>
           <div class="migo-app-media" aria-hidden="true">
-            <img src="/migoapps.jpg" alt="" />
+            <img src="/migoapps-nobg.png" alt="" />
           </div>
         </div>
       </section>
@@ -359,14 +371,37 @@ onUnmounted(() => {
           <p class="footer-address">Calabar, Cross River State, Nigeria</p>
         </div>
         <div class="footer-links">
-          <div><strong>Company</strong><a href="#help">About us</a><a href="#drivers">Careers</a><a href="#help">Blog</a></div>
-          <div><strong>Product</strong><a href="#ride">Ride</a><a href="#drivers">Drive</a><a href="#safety">Safety</a></div>
-          <div><strong>Support</strong><a href="#help">Help center</a><a href="/contact" @click.prevent="emit('open-contact')">Contact us</a><a href="#help">Terms</a></div>
-          <div>
-            <strong>Get in touch</strong>
-            <a href="mailto:migotechnologiesltd01@gmail.com">Email us</a>
-            <a href="/contact" @click.prevent="emit('open-contact')">Contact page</a>
-          </div>
+          <details class="footer-accordion">
+            <summary><strong>Company</strong></summary>
+            <div class="footer-accordion-panel">
+              <a href="#help">About us</a>
+              <a href="#drivers">Careers</a>
+              <a href="#help">Blog</a>
+            </div>
+          </details>
+          <details class="footer-accordion">
+            <summary><strong>Product</strong></summary>
+            <div class="footer-accordion-panel">
+              <a href="#ride">Ride</a>
+              <a href="#drivers">Drive</a>
+              <a href="#safety">Safety</a>
+            </div>
+          </details>
+          <details class="footer-accordion">
+            <summary><strong>Support</strong></summary>
+            <div class="footer-accordion-panel">
+              <a href="#help">Help center</a>
+              <a href="/contact" @click.prevent="emit('open-contact')">Contact us</a>
+              <a href="#help">Terms</a>
+            </div>
+          </details>
+          <details class="footer-accordion">
+            <summary><strong>Get in touch</strong></summary>
+            <div class="footer-accordion-panel">
+              <a href="mailto:migotechnologiesltd01@gmail.com">Email us</a>
+              <a href="/contact" @click.prevent="emit('open-contact')">Contact page</a>
+            </div>
+          </details>
         </div>
         <div class="migo-footer-car-track" aria-hidden="true">
           <img class="migo-footer-car" :src="footerCar" alt="" />

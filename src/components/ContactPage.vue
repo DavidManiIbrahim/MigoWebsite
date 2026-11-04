@@ -391,8 +391,19 @@ function submit() {
 :global(:root[data-theme="dark"] .contact-sent) {
   color: #bfcfa4;
 }
+@media (max-width: 980px) {
+  .contact-methods { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 780px) {
   .contact-methods { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  /* 16px keeps iOS Safari from zooming the page when a field is focused. */
+  .contact-field input,
+  .contact-field select,
+  .contact-field textarea {
+    font-size: 16px;
+  }
 }
 @media (max-width: 600px) {
   .contact-header { min-height: 66px; padding-inline: 18px; }

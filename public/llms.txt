@@ -15,7 +15,7 @@
 - **Live Trip Tracking**: Real-time GPS mapping and route updates from pickup to destination.
 - **Safety Shield**: Trip sharing with trusted contacts, in-app emergency contact integration, and verified driver background checks.
 - **Direct Driver Earnings**: Drivers receive 100% of the fare directly from passengers with a simple flat subscription instead of high per-trip commissions.
-- **Cashless & Secure Payments**: Seamless digital payments in-app after the ride is completed.
+- **Direct Driver Payments**: Riders pay their driver directly by bank transfer or cash after the ride is completed.
 
 ## Target Audience
 - **Riders**: Commuters, travelers, and city residents seeking reliable, fair-priced, and secure transportation.

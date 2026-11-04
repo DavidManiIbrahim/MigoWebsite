@@ -9,13 +9,7 @@ import migoWordmark from "./assets/migo-wordmark.png";
 import migoWordmarkDark from "./assets/migo-wordmark-white.png";
 import LivePage from "./components/LivePage.vue";
 import AdminPage from "./components/AdminPage.vue";
-import ConsentBanner from "./components/ConsentBanner.vue";
-import {
-  getAnalyticsConsent,
-  initAnalytics,
-  setAnalyticsConsent,
-  track,
-} from "./analytics";
+import { initAnalytics, track } from "./analytics";
 
 const defaultPage = "waitlist";
 const PrivacyPage = defineAsyncComponent(() => import("./components/PrivacyPage.vue"));
@@ -25,7 +19,6 @@ const submitted = ref(false);
 const isDark = ref(false);
 const showSplash = ref(true);
 const currentPage = ref(resolvePage(window.location.pathname));
-const analyticsConsent = ref(getAnalyticsConsent());
 
 const defaultSiteUrl = "https://migotech.org";
 const siteUrl = (import.meta.env.VITE_SITE_URL || (typeof window !== "undefined" && window.location.origin && !window.location.origin.includes("localhost") ? window.location.origin : defaultSiteUrl)).replace(/\/$/, "");
@@ -106,11 +99,6 @@ function applyTheme() {
 function openWaitlist() {
   track("waitlist_cta_clicked", { source: "live_page" });
   navigateTo("/waitlist");
-}
-
-function decideAnalyticsConsent(granted) {
-  analyticsConsent.value = granted ? "granted" : "denied";
-  setAnalyticsConsent(granted);
 }
 
 onMounted(() => {
@@ -374,9 +362,4 @@ async function joinWaitlist() {
       <span class="copyright">© 2026 Migo Technologies Limited</span>
     </footer>
   </template>
-
-  <ConsentBanner
-    v-if="analyticsConsent === null && currentPage !== 'admin'"
-    @decision="decideAnalyticsConsent"
-  />
 </template>

@@ -2300,20 +2300,19 @@ h3 {
   color: #f5f4ec;
 }
 
+/* "Drive with MIGO" is a plain page section: no card surface, border or shadow.
+   It sits directly on the page background like the other sections. */
 .migo-driver-panel {
-  min-height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 55px;
-  margin-block: 0 26px;
-  padding: 34px;
-  /* border-radius: 21px; */
-  background: #f3f2f0;
+  margin-block: 0;
+  background: transparent;
   color: #111;
 }
 :root[data-theme="dark"] .migo-driver-panel {
-  background: #242720;
+  background: transparent;
   color: #f5f4ec;
 }
 .driver-intro { padding-left: 0; }
@@ -2486,10 +2485,9 @@ h3 {
     gap: 28px;
   }
   .migo-why,
-  .migo-driver-panel,
   .migo-app-cta,
   .migo-site-footer { width: min(100% - 44px, 650px); }
-  .migo-driver-panel { gap: 25px; padding: 26px; }
+  .migo-driver-panel { gap: 25px; }
   .migo-site-footer { column-gap: 25px; }
 }
 @media (max-width: 600px) {
@@ -2517,7 +2515,6 @@ h3 {
     aspect-ratio: 1.2;
   }
   .migo-why,
-  .migo-driver-panel,
   .migo-app-cta,
   .migo-site-footer { width: calc(100% - 40px); }
   .migo-why { padding-block: 20px 35px; }
@@ -2529,9 +2526,6 @@ h3 {
   .migo-driver-panel {
     grid-template-columns: 1fr;
     gap: 22px;
-    margin-bottom: 18px;
-    padding: 23px 19px;
-    border-radius: 17px;
   }
   .driver-intro h2 { font-size: 29px; }
   .driver-benefits { gap: 7px; }
@@ -3235,13 +3229,13 @@ h3 {
 }
 .migo-driver-panel {
   width: 100%;
-  min-height: 397px;
+  min-height: 0;
   margin: 0 auto;
   padding-block: 56px;
   padding-inline: max(34px, calc((100% - 1080px) / 2));
-  /* border: 1px solid #e8e7e3; */
-  /* border-radius: 20px; */
-  box-shadow: 0 7px 20px rgb(0 0 0 / 8%);
+  /* Container removed — no surface, border or shadow. */
+  background: transparent;
+  box-shadow: none;
 }
 .migo-site-footer {
   width: 100%;
@@ -3310,7 +3304,8 @@ h3 {
     grid-template-columns: 1fr;
   }
   .migo-driver-panel {
-    width: min(100% - 44px, 700px);
+    width: 100%;
+    padding-inline: 22px;
   }
 }
 @media (max-width: 600px) {
@@ -3359,8 +3354,7 @@ h3 {
   .migo-process-inner,
   .migo-faq-inner,
   .migo-safety-inner,
-  .migo-app-cta-inner,
-  .migo-driver-panel {
+  .migo-app-cta-inner {
     width: calc(100% - 40px);
   }
   .migo-site-footer-inner {
@@ -3408,7 +3402,8 @@ h3 {
     gap: 22px;
     min-height: 0;
     margin-block: 0;
-    padding: 23px 19px;
+    padding-block: 44px;
+    padding-inline: 20px;
   }
   .migo-site-footer-inner {
     grid-template-columns: 1fr;
@@ -3668,7 +3663,8 @@ h3 {
     padding-block: 28px;
   }
   .migo-driver-panel {
-    padding: 34px 22px;
+    padding-block: 44px;
+    padding-inline: 20px;
   }
   .migo-site-footer-inner {
     padding-block: 28px 22px;
@@ -3799,63 +3795,6 @@ h3 {
   .migo-safety-grid p {
     font-size: 11px;
   }
-}
-
-/* ── Analytics consent banner ───────────────────────────────────────────────
-   Shown until the visitor allows or declines PostHog analytics/replay. */
-.consent-banner {
-  position: fixed;
-  z-index: 9000;
-  inset-inline: 16px;
-  bottom: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 20px;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 760px;
-  margin-inline: auto;
-  padding: 14px 18px;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: var(--bg);
-  box-shadow: var(--shadow);
-  color: var(--text);
-  font-family: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
-  font-size: 14px;
-  line-height: 1.45;
-}
-
-.consent-copy {
-  flex: 1 1 320px;
-  margin: 0;
-}
-
-.consent-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.consent-banner button {
-  padding: 8px 14px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--text-h);
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.consent-banner .consent-allow {
-  border-color: transparent;
-  background: var(--text-h);
-  color: var(--bg);
-}
-
-.consent-banner button:hover {
-  opacity: 0.85;
 }
 
 .migo-live {
@@ -4083,6 +4022,8 @@ h3 {
   left: 0;
   width: clamp(180px, 26vw, 340px);
   height: auto;
+  object-fit: contain;
+  pointer-events: none;
   filter: drop-shadow(0 14px 18px rgb(0 0 0 / 18%));
   will-change: transform;
 }
@@ -4095,5 +4036,381 @@ h3 {
   }
   .migo-footer-car {
     width: 150px;
+  }
+}
+
+/* ══ Responsive polish ══════════════════════════════════════════════════════
+   This layer sits last on purpose: it overrides the older per-breakpoint
+   patches above and keeps the phone layout usable end to end. */
+
+/* ── Phone header: two rows, so every nav link stays reachable ──────────────
+   The nav used to be `display: none` under 600px, leaving no way to jump
+   between sections. It now moves to its own row below the brand. */
+@media (max-width: 600px) {
+  .migo-live {
+    --migo-live-header-height: 78px;
+  }
+  .migo-live-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 2px;
+    align-items: center;
+    padding-block: 8px 0;
+    padding-inline: 15px;
+  }
+  .migo-live-header .brand {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+  }
+  .migo-live-actions {
+    grid-column: 2;
+    grid-row: 1;
+    margin-left: 0;
+  }
+  .migo-live-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex;
+    gap: 18px;
+    padding-bottom: 8px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .migo-live-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .migo-live-nav a {
+    flex: none;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+  .migo-live-actions .theme-toggle {
+    width: 36px;
+    min-height: 36px;
+  }
+  .migo-download-button {
+    min-height: 36px;
+    padding-inline: 12px;
+    font-size: 10px;
+  }
+}
+
+/* ── Scrolling: snap is a suggestion on touch screens, not a trap ───────────
+   Mandatory snap plus `scroll-snap-stop: always` makes tall sections (hero,
+   Why, Drive) sticky on phones. Sections also size to their content so no
+   screen is padded with dead space. */
+@media (max-width: 900px) {
+  .migo-live {
+    scroll-snap-type: y proximity;
+  }
+  .migo-live > main > section,
+  .migo-live > .migo-site-footer {
+    scroll-snap-stop: normal;
+  }
+}
+@media (max-width: 600px) {
+  .migo-live > main > section,
+  .migo-live > .migo-site-footer {
+    min-height: 0;
+  }
+  .migo-home-hero-inner {
+    padding-block: 32px 28px;
+  }
+}
+@media (max-height: 560px) and (orientation: landscape) {
+  .migo-live {
+    scroll-snap-type: none;
+  }
+  .migo-live > main > section,
+  .migo-live > .migo-site-footer {
+    min-height: 0;
+  }
+}
+
+/* ── Fluid headings: one smooth curve instead of a px step per breakpoint ── */
+@media (max-width: 600px) {
+  /* Waitlist hero — "Be first" must not wrap on a 320px screen. */
+  .hero h1 {
+    font-size: clamp(54px, 15vw, 88px);
+  }
+  .migo-home-copy h1 {
+    font-size: clamp(36px, 10.5vw, 52px);
+  }
+  .migo-why h2,
+  .migo-section-intro h2,
+  .migo-faq h2 {
+    font-size: clamp(23px, 5.6vw, 29px);
+  }
+  .driver-intro h2 {
+    font-size: clamp(27px, 7vw, 33px);
+  }
+  .migo-app-cta h2 {
+    font-size: clamp(24px, 6.4vw, 30px);
+  }
+}
+@media (max-width: 380px) {
+  .migo-home-copy h1 {
+    font-size: clamp(32px, 10.2vw, 40px);
+  }
+  /* The two store badges are ~300px wide together and cannot share a 280px
+     hero column — let them stack instead of overflowing. */
+  .play-card .store-badges {
+    flex-wrap: wrap;
+  }
+}
+
+/* ── Touch ergonomics ──────────────────────────────────────────────────────
+   16px inputs stop iOS Safari from zooming the page on focus, and 44px+
+   targets are comfortable to tap. */
+@media (max-width: 700px) {
+  .waitlist-form > input {
+    height: 46px;
+    font-size: 16px;
+  }
+  .field-label {
+    font-size: 12px;
+  }
+  .ride-toggle legend {
+    font-size: 12px;
+  }
+  .ride-toggle label {
+    height: 40px;
+    font-size: 13px;
+  }
+  .submit-button {
+    min-height: 48px;
+    font-size: 14px;
+  }
+  .form-kicker {
+    font-size: 11px;
+  }
+  .form-intro {
+    font-size: 13px;
+  }
+  .form-error,
+  .privacy-note {
+    font-size: 12px;
+  }
+  .footer-legal {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+
+/* ── "Ready to go" — keep the copy above the app image on phones ─────────── */
+@media (max-width: 600px) {
+  .migo-app-cta-inner > div:first-child {
+    position: relative;
+    z-index: 2;
+  }
+  /* A 50%-wide, 75%-opaque phone sat right behind the headline and badges.
+     The reduced opacity also turned the JPG's black backdrop into a visible
+     dark box, so the image now keeps full opacity and blends screen-on-black. */
+  .migo-app-media {
+    width: 44%;
+    background: none;
+    opacity: 1;
+  }
+  /* Keep the headline and the "Available now…" line readable where they cross
+     the bright edge of the phone. */
+  .migo-app-cta-inner::after {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #111 0%,
+      #111 46%,
+      rgb(17 17 17 / 62%) 68%,
+      transparent 90%
+    );
+    content: "";
+    pointer-events: none;
+  }
+  /* The FAQ toggle is the main tap target on a phone — give it thumb room. */
+  .migo-faq-grid summary::after {
+    width: 28px;
+    height: 28px;
+    font-size: 17px;
+  }
+}
+
+/* ── Drive with MIGO ───────────────────────────────────────────────────────
+   With the card gone the section no longer needs to fake a full screen; it
+   sizes to its content so the closing band does not read as empty space. */
+.migo-live > main > #drivers {
+  min-height: auto;
+}
+
+/* The footer is content-height too: a 100dvh panel left ~550px of empty
+   yellow between the links and the legal line. */
+.migo-live > .migo-site-footer {
+  min-height: auto;
+}
+
+/* The footer inner is a grid; an older `align-items: start` kept it shorter
+   than the footer itself, so the legal line floated above dead yellow space.
+   Stretching the inner lets `grid-template-rows: auto 1fr auto` do its job. */
+.migo-site-footer {
+  align-items: stretch;
+}
+
+/* ── Footer link accordions ────────────────────────────────────────────────
+   On phones the four footer groups ("Company", "Product", "Support" and
+   "Get in touch") collapse into tappable accordions instead of cramming four
+   tiny columns into one row. On wider screens they stay open exactly like the
+   original four-column footer. The open state is synced in LivePage.vue. */
+.footer-links details {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}
+.footer-links summary {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  list-style: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.footer-links summary::-webkit-details-marker {
+  display: none;
+}
+.footer-links summary:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+.footer-links summary::marker {
+  content: "";
+}
+.footer-links summary::after {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  margin-right: 2px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  content: "";
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 180ms ease;
+}
+.footer-links details[open] > summary::after {
+  transform: rotate(225deg) translateY(-2px);
+}
+.footer-accordion-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+@media (min-width: 601px) {
+  /* Desktop keeps the classic always-visible columns. */
+  .footer-links summary {
+    pointer-events: none;
+  }
+  .footer-links summary::after {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-links {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .footer-links details {
+    gap: 0;
+    border-top: 1px solid rgb(0 0 0 / 14%);
+  }
+  .footer-links details:last-child {
+    border-bottom: 1px solid rgb(0 0 0 / 14%);
+  }
+  .footer-links summary {
+    min-height: 48px;
+    padding-block: 10px;
+  }
+  .footer-links summary strong {
+    margin: 0;
+    color: #10100f;
+    font-size: 13px;
+  }
+  .footer-accordion-panel {
+    gap: 12px;
+    padding: 2px 0 14px;
+  }
+  .footer-links .footer-accordion-panel a {
+    font-size: 12px;
+  }
+}
+
+:root[data-theme="dark"] .footer-links details {
+  border-color: rgb(255 255 255 / 24%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-links summary::after {
+    transition: none;
+  }
+}
+
+/* ── "Ready to go" gold band ───────────────────────────────────────────────
+   The download CTA now sits on the same brand yellow as the footer, with dark
+   ink for contrast. The app image is a cut-out PNG (public/migoapps-nobg.png)
+   so it needs no blend mode or backdrop. */
+.migo-app-cta {
+  background: #ffd400;
+  color: #10100f;
+}
+.migo-app-cta-inner {
+  border-radius: 0;
+  background: transparent;
+}
+.migo-app-cta h2,
+.migo-app-cta h2 span {
+  color: #10100f;
+}
+.migo-app-cta p {
+  color: #544a20;
+}
+.migo-app-media {
+  background: none;
+}
+.migo-app-media img {
+  mix-blend-mode: normal;
+}
+
+/* Keep the copy clear of the phone on tablets and up. */
+@media (min-width: 601px) {
+  .migo-app-cta-inner > div:first-child {
+    max-width: 60%;
+  }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  .migo-app-media {
+    top: auto;
+    width: 40%;
+    height: auto;
+  }
+}
+
+/* On phones the copy spans the full card; fade the phone into the gold
+   instead of the old dark scrim. */
+@media (max-width: 600px) {
+  .migo-app-cta-inner::after {
+    background: linear-gradient(
+      90deg,
+      #ffd400 0%,
+      #ffd400 46%,
+      rgb(255 212 0 / 62%) 68%,
+      transparent 90%
+    );
   }
 }

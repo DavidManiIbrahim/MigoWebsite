@@ -1,7 +1,8 @@
 import posthog from "posthog-js";
 
-// Session replay and autocapture only start after the visitor allows analytics
-// in <ConsentBanner>. Nothing is loaded or sent before that decision.
+// PostHog only starts when localStorage holds a granted consent decision.
+// The in-page consent banner has been removed, so visitors without a stored
+// grant stay un-tracked. Nothing is loaded or sent before that decision.
 const CONSENT_KEY = "migo-analytics-consent";
 const POSTHOG_KEY = import.meta.env.VITE_POSTHOG_KEY;
 const POSTHOG_HOST = import.meta.env.VITE_POSTHOG_HOST || "https://us.i.posthog.com";
